@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Résumé · Khondoker Tanvir Hossain</title>
+  <meta name="description" content="Résumé of Khondoker Tanvir Hossain, Senior Software Engineer. Java, Spring, AWS, Kubernetes. Banking, government and healthcare platforms.">
+  <link rel="canonical" href="https://tanvir.eliooo.org/resume.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main" class="resume">
+    <div class="resume-actions">
+      <a class="btn btn-primary" href="resume.pdf">Download PDF</a>
+      <a class="btn" href="./">Back to site</a>
+    </div>
+
+    <h1>Khondoker Tanvir Hossain</h1>
+    <p class="contact-line">Senior Software Engineer · k.tanvir.hossain@gmail.com · linkedin.com/in/k-tanvir-hossain · github.com/KhondokerTanvirHossain · tanvir.eliooo.org · Dhaka, Bangladesh (UTC+6) · Open to remote roles with US hours overlap</p>
+
+    <h2>Summary</h2>
+    <p>Senior Software Engineer with five years building Java and Spring platforms in regulated domains: internet banking for a state-owned bank, a national microfinance regulator's system, a HIPAA remote patient monitoring MVP on AWS, and a doctor-first digital health product. Owns the full path from architecture and infrastructure to delivery and the client conversation. Practices test-driven development, clean and hexagonal architecture, reactive Java, and infrastructure as code.</p>
+
+    <h2>Experience</h2>
+
+    <h3>Senior Software Engineer, Celloscope Ltd, Dhaka, Bangladesh, Sep 2021 to present</h3>
+
+    <h4>Better Health, product and platform owner, Oct 2025 to present</h4>
+    <ul>
+      <li>Own product and delivery for a doctor-first prescription and telemedicine platform across five Scrum boards and about 20 engineers on two-week sprints.</li>
+      <li>Designed a Debezium to Kafka change-data-capture pipeline consolidating five PostgreSQL clusters into one analytics database with PHI excluded at source.</li>
+      <li>Built live video consultation with Angular and Agora, including Keycloak-authenticated routing and token handling.</li>
+      <li>Migrated deployments from Docker Swarm to K3s with Helm, Traefik, HashiCorp Vault and GitLab CI/CD; operated Prometheus, Grafana, Graylog and Zipkin observability.</li>
+      <li>Defined the speech-to-text accuracy plan (word error rate plus extraction F1 with a zero-tolerance gate for critical clinical errors) and QA acceptance criteria from a 300-page requirements document.</li>
+      <li>Produced market sizing, pricing and cost models and investor reporting for the product.</li>
+    </ul>
+
+    <h4>Primefocus Health (LG NOVA), engineering manager and architect, Jul 2024 to Sep 2025</h4>
+    <ul>
+      <li>Led delivery of a HIPAA-compliant remote patient monitoring MVP: 8+ Spring Boot microservices, patient app and provider portal, shipped on time and on budget; funding secured on the MVP.</li>
+      <li>Provisioned multi-account AWS (EKS, RDS, WAF, KMS, Secrets Manager, Vault, SFTP) with Terraform and Terragrunt across three environments; HIPAA compliance scan passed at 100%.</li>
+      <li>Chose a single Flutter codebase for Android, iOS and web, camera-based vitals via Binah.ai after a proof of concept, and a strategy pattern for smart-scale versus manual weight.</li>
+      <li>Set up GitLab CI/CD with blue-green zero-downtime Kubernetes deployments and a central FF4j feature-flag service for canary and A/B rollouts.</li>
+      <li>Ran observability and on-call: Prometheus, Grafana, Loki, Zipkin and PagerDuty with P0 and P1 playbooks.</li>
+    </ul>
+
+    <h4>MRA-IMS for the Microcredit Regulatory Authority, Team Lead, May 2023 to Jun 2024</h4>
+    <ul>
+      <li>Led a multi-tenant microfinance platform for Bangladesh's national regulator, targeting 20 institutions, 500 branches, 15,000 field officers and 1.2M accounts, scoped to all 731 licensed institutions.</li>
+      <li>Designed a configurable loan and savings engine handling different product rules and interest methods per tenant without code changes.</li>
+      <li>Built reactive batch and parallel end-of-day pipelines sustaining 600,000+ transactions per week at 99.99% uptime.</li>
+      <li>Ran the two-institution proof of concept and field rollout, including on-site paper-to-digital migration in Tangail.</li>
+    </ul>
+
+    <h4>Internet Banking for Agrani Bank PLC, Software Engineer, Sep 2021 to Apr 2023</h4>
+    <ul>
+      <li>Built Spring Boot, PostgreSQL and Redis microservices for a mobile-first internet banking platform launched in March 2022, now serving 583,000+ customers and BDT 212.5B (about USD 1.8B) in transactions at 120+ TPS.</li>
+      <li>Integrated Temenos T24 core banking through reusable middleware, plus BEFTN, NPSB, mobile wallets (bKash, Nagad, Upay), QR, ekpay, telco recharge and Election Commission eKYC.</li>
+      <li>Implemented OAuth2 PKCE, MFA, RBAC, mTLS and Vault-managed secrets; owned the JUnit and Mockito test strategy for payment flows.</li>
+      <li>Served as the bank-facing engineer: gathered requirements from the bank's senior IT staff and handled on-site deployments and incidents until a DevOps team was formed.</li>
+    </ul>
+
+    <h3>Software Engineer, CoKreates, Dhaka, Bangladesh, 2020 to 2021</h3>
+    <ul>
+      <li>Built the Accounts module of a government resource planning ERP: 13 Spring microservices and 119 controllers on Spring Cloud with Zuul, Eureka, Feign and an OAuth2 and JWT gateway.</li>
+    </ul>
+
+    <h2>Skills</h2>
+    <p>Java 21, Spring Boot, Spring WebFlux, Spring Security, Reactive Java, R2DBC, Angular, Flutter (delivery), PostgreSQL, Redis, Kafka, Debezium, Elasticsearch, Liquibase, Docker, Kubernetes (EKS, K3s), Helm, Terraform, Terragrunt, Ansible, AWS, GitLab CI/CD, Keycloak, HashiCorp Vault, Prometheus, Grafana, Zipkin, JUnit, Mockito, test-driven development, domain-driven design, CQRS, event sourcing, clean and hexagonal architecture, HIPAA and PCI DSS delivery, Jira, Scrum.</p>
+
+    <h2>Education</h2>
+    <p>BSc in Computer Science and Engineering, Chittagong University of Engineering and Technology (CUET), 2015 to 2019.</p>
+
+    <h2>Certifications</h2>
+    <p>AWS: Introduction, RDS, CloudFormation, EKS, Advanced Terraform. KodeKloud: Docker Swarm, Kubernetes, DevOps. Python.</p>
+  </main>
+</body>
+</html>

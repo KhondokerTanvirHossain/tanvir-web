@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internet banking for Agrani Bank PLC · Tanvir Hossain</title>
+  <meta name="description" content="Case study: a mobile-first internet banking platform for a state-owned bank, launched in about a month, now serving 583K+ customers and $1.8B in transactions.">
+  <link rel="canonical" href="https://tanvir.eliooo.org/work/agrani-internet-banking">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Internet banking for a state-owned bank · Tanvir Hossain">
+  <meta property="og:description" content="Launched in about a month. 583K+ customers, $1.8B processed, 120+ TPS.">
+  <meta property="og:image" content="https://tanvir.eliooo.org/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <a class="name" href="../">Tanvir Hossain</a>
+      <nav aria-label="Sections">
+        <ul class="nav-links" id="nav-links" style="display:flex">
+          <li><a href="../#work">Work</a></li>
+          <li><a href="../resume.pdf">Résumé</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="cs-head">
+      <div class="wrap">
+        <a class="back" href="../">← All work</a>
+        <p class="eyebrow">Case study</p>
+        <h1>Internet banking for a state-owned bank</h1>
+        <p class="lede">Agrani Bank PLC needed a mobile-first internet banking platform on its own infrastructure, integrated with Temenos T24, in about a month.</p>
+        <p class="cs-meta"><span><b>Client</b> Agrani Bank PLC</span><span><b>Period</b> Sep 2021 to Apr 2023</span><span><b>Role</b> Software Engineer</span><span><b>Team</b> 15</span></p>
+      </div>
+    </div>
+
+    <div class="wrap cs-body">
+      <div class="prose">
+        <h2>Context</h2>
+        <p>Agrani Bank PLC is one of Bangladesh's state-owned banks. Celloscope built its Internet Banking platform: iOS, Android and web for individuals, SMEs and corporates. The platform launched publicly in March 2022 and was delivered in about a month, with the T24 core banking integration finished in about a week through Celloscope's CBS middleware. A later deployment for Bangladesh Krishi Bank, on a different core, proved the architecture was core-agnostic.</p>
+
+        <h2>Constraint</h2>
+        <p>Bank-hosted infrastructure, no cloud. Every deployment and every incident happened inside the bank's data centre with the bank's IT staff watching. The security posture had to satisfy a state bank from day one. And the payment rails were many: BEFTN batch transfers, NPSB real-time transfers, mobile wallets (bKash, Nagad, Upay), QR payments and cash-out, ekpay, telco recharge, and Election Commission eKYC with OCR, face match and liveness.</p>
+
+        <h2>What I owned</h2>
+        <p>I joined as a backend Java developer on the Spring Boot services. Within the first year I became the engineer who faced the bank: gathering requirements from its senior IT staff, translating them for the team, and being physically present for deployments and infrastructure incidents until a dedicated DevOps team was formed. I owned the test strategy, with JUnit and Mockito unit and integration suites plus regression coverage for payment flows, and ran delivery in Jira: sprints, grooming and release-readiness reviews.</p>
+
+        <h2>Architecture</h2>
+        <div class="diagram">
+          <svg viewBox="0 0 800 250" role="img" aria-label="Angular apps call an API gateway; Spring Boot services use PostgreSQL and Redis, reach Temenos T24 through a CBS middleware, and connect to payment rails.">
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#15171A"/></marker></defs>
+            <g font-family="Source Sans 3, system-ui, sans-serif" font-size="14" text-anchor="middle">
+              <rect x="20" y="95" width="130" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="85" y="120" fill="#15171A">Angular apps</text><text x="85" y="138" fill="#5A6068" font-size="12">iOS · Android · web</text>
+              <rect x="200" y="95" width="120" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="260" y="130" fill="#15171A">API gateway</text>
+              <rect x="370" y="95" width="150" height="60" rx="6" fill="#1B5E3F"/><text x="445" y="120" fill="#fff">IB services</text><text x="445" y="138" fill="#DCE9E2" font-size="12">Spring Boot</text>
+              <rect x="370" y="15" width="150" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="445" y="43" fill="#15171A">PostgreSQL · Redis</text>
+              <rect x="570" y="15" width="200" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="670" y="35" fill="#15171A">Payment rails</text><text x="670" y="51" fill="#5A6068" font-size="12">BEFTN · NPSB · MFS · QR · eKYC</text>
+              <rect x="570" y="95" width="200" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="670" y="130" fill="#15171A">CBS middleware</text>
+              <rect x="570" y="185" width="200" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="670" y="213" fill="#15171A">Temenos T24 core</text>
+              <g stroke="#15171A" stroke-width="1.2" fill="none" marker-end="url(#ar)">
+                <path d="M150 125H198"/><path d="M320 125H368"/><path d="M445 95V63"/><path d="M520 125H568"/><path d="M520 110L568 45"/><path d="M670 155V183"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <h2>Decisions and trade-offs</h2>
+        <ul>
+          <li><b>One seam for the core bank.</b> Every T24 call went through the CBS middleware, so the second bank on a different core reused the platform unchanged.</li>
+          <li><b>Feature flags for bank-hosted releases.</b> With no cloud and no easy rollback, flags let us ship dark and enable per cohort. Zero-downtime releases on the bank's own servers.</li>
+          <li><b>Security before features.</b> OAuth2 PKCE for the apps, MFA, RBAC, mTLS between services, secrets in HashiCorp Vault, encryption at rest and in transit. The bank's audits were easier because the posture existed from sprint one.</li>
+          <li><b>Be in the room.</b> Standing next to the bank's operations team during deployments cost evenings. It also built the trust that made every later requirements conversation faster.</li>
+        </ul>
+
+        <h2>Outcome</h2>
+        <ul class="outcome-list">
+          <li><b>583K+</b><span>customers, March 2022 to May 2026</span></li>
+          <li><b>$1.8B</b><span>BDT 212.5B in transactions processed</span></li>
+          <li><b>23.2M</b><span>logins in 2025</span></li>
+          <li><b>120+ TPS</b><span>sustained, with 20.9x growth in transaction value from launch year to the 2025 peak</span></li>
+        </ul>
+
+        <h2>Stack</h2>
+        <p>Java, Spring Boot, Spring Security, PostgreSQL, Redis, Angular, GitLab CI/CD, Docker, feature flags, Prometheus, Grafana, centralized logging, JUnit, Mockito, HashiCorp Vault, Jira.</p>
+
+        <div class="cs-foot">
+          <a href="primefocus-rpm">Next: HIPAA remote patient monitoring →</a>
+          <a class="btn btn-primary" href="../resume.pdf">Download résumé</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>Tanvir Hossain · Dhaka · 2026</span>
+      <a href="https://github.com/KhondokerTanvirHossain/tanvir-web" rel="noopener">Source</a>
+    </div>
+  </footer>
+</body>
+</html>

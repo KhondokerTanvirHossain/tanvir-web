@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HIPAA remote patient monitoring for Primefocus Health · Tanvir Hossain</title>
+  <meta name="description" content="Case study: a HIPAA-compliant remote patient monitoring MVP on AWS for a US startup, delivered on time, compliance scan passed at 100%, funding secured.">
+  <link rel="canonical" href="https://tanvir.eliooo.org/work/primefocus-rpm">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HIPAA remote patient monitoring on AWS · Tanvir Hossain">
+  <meta property="og:description" content="MVP on time and on budget. Compliance scan passed at 100%. Funding secured.">
+  <meta property="og:image" content="https://tanvir.eliooo.org/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <a class="name" href="../">Tanvir Hossain</a>
+      <nav aria-label="Sections">
+        <ul class="nav-links" id="nav-links" style="display:flex">
+          <li><a href="../#work">Work</a></li>
+          <li><a href="../resume.pdf">Résumé</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="cs-head">
+      <div class="wrap">
+        <a class="back" href="../">← All work</a>
+        <p class="eyebrow">Case study</p>
+        <h1>HIPAA remote patient monitoring, built to raise a round</h1>
+        <p class="lede">Primefocus Health, a US startup later acquired by LG NOVA, needed an investor-ready remote patient monitoring MVP on a fixed date, on HIPAA-eligible AWS, with no in-house engineering team.</p>
+        <p class="cs-meta"><span><b>Client</b> Primefocus Health (LG NOVA)</span><span><b>Period</b> Jul 2024 to Sep 2025</span><span><b>Role</b> Engineering manager and architect</span><span><b>Client title</b> Technical Product Manager</span></p>
+      </div>
+    </div>
+
+    <div class="wrap cs-body">
+      <div class="prose">
+        <h2>Context</h2>
+        <p>The platform monitors obesity-care patients in a US health network: vitals from the phone camera, weight from a connected scale, a patient app and a provider portal. Celloscope was the full engineering partner, from discovery and technical assessment through HIPAA-ready infrastructure, backend, both apps and a product roadmap. I worked as the VP of Engineering's right hand, running the engineering team and owning the architecture.</p>
+
+        <h2>Constraint</h2>
+        <p>The delivery date was tied to investor milestones and could not move. HIPAA compliance had to be demonstrable through an external scan, not promised. After launch the client would operate with a small team, so low maintenance mattered as much as features.</p>
+
+        <h2>What I owned</h2>
+        <p>Architecture and infrastructure design, vendor selection through proofs of concept, team management and sprint delivery in Jira, the handover documentation, and the on-call setup. I also translated between the client's product intent and the engineering plan, which is why the client called the role Technical Product Manager.</p>
+
+        <h2>Architecture</h2>
+        <div class="diagram">
+          <svg viewBox="0 0 800 250" role="img" aria-label="Flutter patient and provider apps authenticate with Cognito and call Spring Boot services on EKS, which use RDS and ElastiCache; Binah.ai SDK runs in the app and a Tenovi scale feeds weight; a feature flag service gates rollouts.">
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#15171A"/></marker></defs>
+            <g font-family="Source Sans 3, system-ui, sans-serif" font-size="14" text-anchor="middle">
+              <rect x="20" y="95" width="140" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="90" y="120" fill="#15171A">Flutter apps</text><text x="90" y="138" fill="#5A6068" font-size="12">patient · provider · web</text>
+              <rect x="20" y="185" width="140" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="90" y="205" fill="#15171A">Binah.ai SDK</text><text x="90" y="221" fill="#5A6068" font-size="12">camera vitals</text>
+              <rect x="210" y="15" width="120" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="270" y="43" fill="#15171A">AWS Cognito</text>
+              <rect x="210" y="95" width="120" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="270" y="130" fill="#15171A">API gateway</text>
+              <rect x="380" y="95" width="160" height="60" rx="6" fill="#1B5E3F"/><text x="460" y="120" fill="#fff">Spring Boot services</text><text x="460" y="138" fill="#DCE9E2" font-size="12">8+ on EKS, 3 accounts</text>
+              <rect x="380" y="15" width="160" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="460" y="43" fill="#15171A">RDS · ElastiCache</text>
+              <rect x="380" y="185" width="160" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="460" y="205" fill="#15171A">FF4j flag service</text><text x="460" y="221" fill="#5A6068" font-size="12">canary · A/B · dark launch</text>
+              <rect x="600" y="95" width="180" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="690" y="120" fill="#15171A">Tenovi smart scale</text><text x="690" y="138" fill="#5A6068" font-size="12">or manual entry, by strategy</text>
+              <g stroke="#15171A" stroke-width="1.2" fill="none" marker-end="url(#ar)">
+                <path d="M160 125H208"/><path d="M90 185V157"/><path d="M270 95V63"/><path d="M330 125H378"/><path d="M460 95V63"/><path d="M460 185V157"/><path d="M600 125H542"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <h2>Decisions and trade-offs</h2>
+        <ul>
+          <li><b>One Flutter codebase for Android, iOS and web.</b> Three frontends became one for a client that would run with a small team. Clean architecture layers kept it testable.</li>
+          <li><b>Camera-based vitals over a webview SDK.</b> After a proof of concept, Binah.ai's native rPPG SDK for heart rate and SpO2 beat the alternative on reliability and user experience.</li>
+          <li><b>Strategy pattern for weight capture.</b> Tenovi scale or manual entry, switched at runtime, so hardware availability never blocked patient onboarding.</li>
+          <li><b>Multi-account AWS through Terraform and Terragrunt.</b> Dev, staging and prod in separate accounts with their own VPCs and EKS clusters, state in S3 with DynamoDB locks, HIPAA-eligible services only: RDS, KMS, WAF, Shield, Secrets Manager, Transfer Family SFTP, CloudTrail and Config.</li>
+          <li><b>Blue-green on Kubernetes plus a central FF4j flag service.</b> Zero-downtime releases became routine, with role and environment based flags for canary and dark launches.</li>
+          <li><b>Observability before launch, not after.</b> Prometheus, Grafana, Loki and Zipkin, with alerts to Slack and PagerDuty and written P0/P1 playbooks for 24/7 support.</li>
+        </ul>
+
+        <h2>Outcome</h2>
+        <ul class="outcome-list">
+          <li><b>On time</b><span>MVP delivered on the fixed date and on budget</span></li>
+          <li><b>100%</b><span>HIPAA compliance scan pass across critical, high and low</span></li>
+          <li><b>Funded</b><span>the round closed on the MVP; the partnership continued as keep-the-lights-on support</span></li>
+          <li><b>8+ · 2 · 3</b><span>microservices, portals, environments</span></li>
+        </ul>
+
+        <h2>Stack</h2>
+        <p>Java, Spring Boot, Flutter, AWS Amplify and Cognito, EKS, RDS, ECR, Route53, CloudFront, WAF, Shield, KMS, Secrets Manager, HashiCorp Vault, Transfer Family, Terraform, Terragrunt, GitLab CI/CD, Prometheus, Grafana, Loki, Zipkin, PagerDuty, Appium, Jira.</p>
+
+        <div class="cs-foot">
+          <a href="mra-ims">Next: a platform for a national regulator →</a>
+          <a class="btn btn-primary" href="../resume.pdf">Download résumé</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>Tanvir Hossain · Dhaka · 2026</span>
+      <a href="https://github.com/KhondokerTanvirHossain/tanvir-web" rel="noopener">Source</a>
+    </div>
+  </footer>
+</body>
+</html>

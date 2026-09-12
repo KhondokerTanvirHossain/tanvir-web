@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Better Health, doctor-first prescriptions by voice · Tanvir Hossain</title>
+  <meta name="description" content="Case study: a voice-enabled prescription and telemedicine platform for Bangladesh. Product and platform ownership, CDC analytics, reactive services, K3s.">
+  <link rel="canonical" href="https://tanvir.eliooo.org/work/better-health">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Doctor-first prescriptions, by voice · Tanvir Hossain">
+  <meta property="og:description" content="Prescription and telemedicine live. CDC analytics across five database clusters. Five boards, about 20 engineers.">
+  <meta property="og:image" content="https://tanvir.eliooo.org/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <a class="name" href="../">Tanvir Hossain</a>
+      <nav aria-label="Sections">
+        <ul class="nav-links" id="nav-links" style="display:flex">
+          <li><a href="../#work">Work</a></li>
+          <li><a href="../resume.pdf">Résumé</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="cs-head">
+      <div class="wrap">
+        <a class="back" href="../">← All work</a>
+        <p class="eyebrow">Case study</p>
+        <h1>A prescription tool doctors actually finish</h1>
+        <p class="lede">Better Health is Celloscope's own product: a doctor-first, voice-enabled prescription and telemedicine platform for Bangladesh. I own product and platform delivery.</p>
+        <p class="cs-meta"><span><b>Company</b> Celloscope Ltd</span><span><b>Period</b> Oct 2025 to present</span><span><b>Role</b> Senior Software Engineer, product and platform owner</span><span><b>Team</b> about 20 engineers, five boards</span></p>
+      </div>
+    </div>
+
+    <div class="wrap cs-body">
+      <div class="prose">
+        <h2>Context</h2>
+        <p>The product began as bdEMR, became Niramoy, and was rebranded Better Health in July 2026. The thesis is a flywheel: a free, voice-enabled prescription tool wins doctors, patients follow, and telemedicine and a patient-owned record come next. The prescription and telemedicine modules are live, with appointments, a doctor dashboard and patient records in the same portal.</p>
+
+        <h2>Constraint</h2>
+        <p>A digital prescription must be faster than handwriting or doctors leave. Speech arrives in Bangla, English and a mix of both. Clinical safety is non-negotiable: no autonomous diagnosis, no dosing suggestions, and nothing prints unless the doctor has confirmed it on screen. Patient data stays in Bangladesh under the 2025 data protection ordinance, and anything sent to an external model is de-identified first.</p>
+
+        <h2>What I owned</h2>
+        <p>Product: the prescription-first strategy, a 300-page doctor portal requirements document across 14 modules, the speech-to-text specification, and a consolidated backlog of 60 epics and 215 stories. Engineering: the change-data-capture analytics pipeline, the Angular and Agora video consultation feature, the Bengali-first clinical encounter interface, the migration from Docker Swarm to K3s, and the security and compliance track. Delivery: Scrum across four to five streams, Jira administration, embedded QA and the accuracy test plan for speech. Business: market sizing, pricing and cost models, investor reporting, and a hospital-wide go-live programme for about 200 doctors.</p>
+
+        <h2>Architecture</h2>
+        <div class="diagram">
+          <svg viewBox="0 0 800 260" role="img" aria-label="Angular portals call a Spring Cloud Gateway secured by Keycloak; the gateway routes to prescription, appointment and telemedicine services and to a Python speech platform; services write to five PostgreSQL clusters, which Debezium streams through Kafka into an analytics database.">
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#15171A"/></marker></defs>
+            <g font-family="Source Sans 3, system-ui, sans-serif" font-size="14" text-anchor="middle">
+              <rect x="20" y="95" width="130" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="85" y="120" fill="#15171A">Angular portals</text><text x="85" y="138" fill="#5A6068" font-size="12">doctor · patient · admin</text>
+              <rect x="200" y="95" width="150" height="60" rx="6" fill="#1B5E3F"/><text x="275" y="120" fill="#fff">Gateway</text><text x="275" y="138" fill="#DCE9E2" font-size="12">AI tracing · PHI redaction</text>
+              <rect x="200" y="15" width="150" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="275" y="43" fill="#15171A">Keycloak OIDC</text>
+              <rect x="400" y="15" width="170" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="485" y="40" fill="#15171A">Domain services</text><text x="485" y="58" fill="#5A6068" font-size="12">prescription · appointment · video</text>
+              <rect x="400" y="185" width="170" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="485" y="210" fill="#15171A">Speech platform</text><text x="485" y="228" fill="#5A6068" font-size="12">Python · LLM extraction</text>
+              <rect x="620" y="15" width="160" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="700" y="40" fill="#15171A">5 PostgreSQL clusters</text><text x="700" y="58" fill="#5A6068" font-size="12">physically separate</text>
+              <rect x="620" y="105" width="160" height="46" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="700" y="133" fill="#15171A">Debezium → Kafka</text>
+              <rect x="620" y="185" width="160" height="60" rx="6" fill="#fff" stroke="#15171A" stroke-width="1.2"/><text x="700" y="210" fill="#15171A">Analytics PostgreSQL</text><text x="700" y="228" fill="#5A6068" font-size="12">PHI excluded at source</text>
+              <g stroke="#15171A" stroke-width="1.2" fill="none" marker-end="url(#ar)">
+                <path d="M150 125H198"/><path d="M275 95V63"/><path d="M350 110L398 55"/><path d="M350 140L398 205"/><path d="M570 45H618"/><path d="M700 75V103"/><path d="M700 151V183"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <h2>Decisions and trade-offs</h2>
+        <ul>
+          <li><b>Change data capture with PHI excluded at source.</b> Debezium streams five clusters through Kafka into one analytics database. Identifying columns never enter the connector, so the analytics side is safe by construction. I also debugged the Kafka Connect memory, TOAST and JSONB issues that come with it.</li>
+          <li><b>Hexagonal, reactive-only services on Java 21.</b> Spring Boot 3 WebFlux and R2DBC with no blocking calls, an idempotency framework built on a claim-check with a unique index, and effectively-once Kafka consumers via at-least-once delivery plus idempotent handlers and publish-after-commit.</li>
+          <li><b>The gateway is the mother service for AI.</b> It traces every model input and output, captures the doctor's edits before and after, and redacts PHI at the boundary. Every AI decision is auditable.</li>
+          <li><b>A zero-tolerance error gate.</b> Transcription and extraction are measured separately, with word error rate and precision, recall and F1 across six language and difficulty groups. Any wrong drug, dose, side or negation fails the release. An in-house 30M-parameter extraction model is A/B tested against a hosted model per section.</li>
+          <li><b>K3s over Docker Swarm.</b> Helm, Traefik, a web application firewall, Vault with dynamic database credentials, and GitLab CI/CD. Cheaper to run and easier to reason about than the Swarm it replaced.</li>
+        </ul>
+
+        <h2>Outcome</h2>
+        <ul class="outcome-list">
+          <li><b>2 modules live</b><span>prescription and telemedicine, with appointments and records</span></li>
+          <li><b>27,000+</b><span>regulator-verified medicines, 18 dosage-form classes, Bangla dosing</span></li>
+          <li><b>45,000+</b><span>chief-complaint terms with an AI standardisation layer</span></li>
+          <li><b>7 sections</b><span>of the prescription driven by speech, Bangla and English</span></li>
+        </ul>
+        <p>Definition of done for the team: a real doctor completes a prescription unassisted, on production.</p>
+
+        <h2>Stack</h2>
+        <p>Java 21, Spring Boot 3 WebFlux, R2DBC, Liquibase, .NET Core, Python, Angular, Agora, Keycloak, PostgreSQL, Debezium, Kafka, MinIO, HashiCorp Vault, K3s, Helm, Traefik, Cloudflare, GitLab CI/CD, Graylog, Elasticsearch, Prometheus, Grafana, Tempo, Zipkin, OpenTelemetry, Locust, Jira.</p>
+
+        <div class="cs-foot">
+          <a href="agrani-internet-banking">Next: internet banking for a state-owned bank →</a>
+          <a class="btn btn-primary" href="../resume.pdf">Download résumé</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>Tanvir Hossain · Dhaka · 2026</span>
+      <a href="https://github.com/KhondokerTanvirHossain/tanvir-web" rel="noopener">Source</a>
+    </div>
+  </footer>
+</body>
+</html>
