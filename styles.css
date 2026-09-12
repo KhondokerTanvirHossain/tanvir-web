@@ -89,8 +89,12 @@ p { margin: 0; }
 
 /* ---------- work cards ---------- */
 .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.card { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
-.card:hover { border-color: var(--ink); }
+.card { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); text-decoration: none; }
+.card:hover { border-color: var(--ink); text-decoration: none; }
+.card h3 { color: var(--ink); }
+.card:hover h3 { color: var(--accent); }
+.card .more { color: var(--accent); }
+.card:hover .more { text-decoration: underline; }
 .card .meta { font: 600 12px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
 .card h3 { font-size: 24px; }
 .card .outcome { color: var(--ink); font-size: 17px; }
@@ -144,7 +148,8 @@ p { margin: 0; }
 .cs-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 20px; color: var(--mute); font-size: 15px; }
 .cs-meta b { color: var(--ink); font-weight: 600; }
 .cs-body { padding-block: clamp(32px, 5vw, 56px); }
-.prose { max-width: var(--measure); }
+.prose { max-width: 820px; }
+.prose p, .prose ul:not(.outcome-list), .prose h2 { max-width: var(--measure); }
 .prose h2 { font-size: 26px; margin: 40px 0 12px; }
 .prose h2:first-child { margin-top: 0; }
 .prose p { margin-bottom: 14px; }
