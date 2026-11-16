@@ -24,10 +24,18 @@ let failures = 0;
 const check = (name, ok, detail = '') => { if (!ok) failures++; console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  (${detail})` : ''}`); };
 
 try {
-  let targets;
-  for (let i = 0; i < 60 && !targets; i++) { try { targets = await (await fetch(`http://127.0.0.1:${DEBUG}/json`)).json(); } catch { await sleep(250); } }
+  // Chrome can be slow to start on CI runners, and may come up without a page: wait up to 30 s and open one if needed.
+  let page;
+  for (let i = 0; i < 120 && !page; i++) {
+    try {
+      const targets = await (await fetch(`http://127.0.0.1:${DEBUG}/json`)).json();
+      page = targets.find((t) => t.type === 'page') || (i > 8 ? await (await fetch(`http://127.0.0.1:${DEBUG}/json/new?about:blank`, { method: 'PUT' })).json() : undefined);
+    } catch { /* not up yet */ }
+    if (!page) await sleep(250);
+  }
+  if (!page) throw new Error('Chrome did not expose a page over the DevTools protocol within 30 s');
   for (let i = 0; i < 40; i++) { try { await fetch(BASE); break; } catch { await sleep(250); } }
-  const ws = new WebSocket(targets.find((t) => t.type === 'page').webSocketDebuggerUrl);
+  const ws = new WebSocket(page.webSocketDebuggerUrl);
   await new Promise((r) => { ws.onopen = r; });
   let seq = 0; const pending = new Map(); const errors = [];
   ws.onmessage = (m) => {
