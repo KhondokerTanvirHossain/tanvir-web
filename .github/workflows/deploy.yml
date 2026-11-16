@@ -53,6 +53,7 @@ jobs:
           USER: ${{ secrets.EC2_USER }}
           KEY: ${{ secrets.EC2_SSH_KEY }}
           KNOWN_HOSTS: ${{ secrets.EC2_KNOWN_HOSTS }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           umask 077
@@ -61,5 +62,5 @@ jobs:
           opts="-i key -o ConnectTimeout=20 $check"
           ssh $opts "$USER@$HOST" 'mkdir -p ~/tanvir-web'
           scp $opts deploy/compose.yml deploy/deploy.sh "$USER@$HOST:~/tanvir-web/"
-          ssh $opts "$USER@$HOST" "IMAGE_TAG=${{ github.sha }} bash ~/tanvir-web/deploy.sh"
+          printf '%s' "$GHCR_TOKEN" | ssh $opts "$USER@$HOST" "IMAGE_TAG=${{ github.sha }} GHCR_USER=${{ github.actor }} bash ~/tanvir-web/deploy.sh"
           rm -f key known_hosts
