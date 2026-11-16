@@ -2,7 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    # feat/redesign deploys too while the site is previewed at the sslip.io address (DNS still on Vercel).
+    branches: [main, feat/redesign]
   workflow_dispatch:
 
 concurrency:
