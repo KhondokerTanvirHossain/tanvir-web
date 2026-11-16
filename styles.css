@@ -166,3 +166,5 @@ h1, h2, h3 { text-wrap: balance; }
   .tp-btn:active { transform: none; }
   .tp-card:hover { transform: none; }
 }
+/* Keyboard focus inside the tucked-away nav brings it into view. */
+.tp-nav:focus-within { transform: none; }

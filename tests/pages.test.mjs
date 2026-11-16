@@ -156,3 +156,29 @@ test('résumé: Engineering Lead now, real titles before', () => {
 test('case studies use the new chrome', () => {
   for (const w of WORK) { const h = read(w); assert.match(h, /class="tp-nav/); assert.match(h, /type="module" src="\.\.\/main\.js"/); }
 });
+
+const prototype = read('docs/superpowers/specs/2026-11-17-portfolio-redesign-prototype.html');
+const plain = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+test('home: every product lede sentence traces to facts or the approved prototype', () => {
+  const sources = plain(facts) + ' ' + plain(prototype);
+  for (const m of home.matchAll(/<p class="tp-chapter__lede">([\s\S]*?)<\/p>/g)) {
+    for (const s of plain(m[1]).split(/(?<=[.।;])\s+/).map((x) => x.replace(/[.।;]$/, '')).filter(Boolean))
+      assert.ok(sources.includes(s), `untraced: "${s}"`);
+  }
+});
+
+test('résumé: the current title is Engineering Lead, not Senior Software Engineer', () => {
+  const r = read('resume.html');
+  assert.doesNotMatch(r, /<h3>Senior Software Engineer, Celloscope/);
+  assert.match(r, /<h3>Celloscope Ltd, Dhaka, Bangladesh, Sep 2021 to present<\/h3>/);
+  assert.match(r, /Engineering Lead from Oct 2025/);
+});
+
+test('facts: identity carries the current title', () => assert.doesNotMatch(facts, /Title: Senior Software Engineer/));
+
+test('deploy workflow: only the deploy job can write packages', () => {
+  const y = read('.github/workflows/deploy.yml');
+  const top = y.slice(0, y.indexOf('jobs:'));
+  assert.doesNotMatch(top, /packages:\s*write/);
+  assert.match(y.slice(y.indexOf('  deploy:')), /permissions:\s*\n\s*contents: read\s*\n\s*packages: write/);
+});

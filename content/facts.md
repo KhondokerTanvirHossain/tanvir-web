@@ -6,7 +6,7 @@ Single source of truth. Every claim on the site and in the PDF traces back to a 
 
 - Khondoker Tanvir Hossain ("Tanvir"). Dhaka, Bangladesh. Remote-ready, UTC+6.
 - Email k.tanvir.hossain@gmail.com. GitHub github.com/KhondokerTanvirHossain. LinkedIn linkedin.com/in/k-tanvir-hossain/.
-- Title: Senior Software Engineer, Celloscope Ltd, Sept 2021 to present.
+- Current title: Engineering Lead, Better Health, Celloscope Ltd, Oct 2025 to present (LinkedIn updated to match). At Celloscope since Sept 2021, first as Senior Software Engineer.
 - Positioning: backend Java engineer who grew into owning delivery, platform and product for regulated systems (banking, government, healthcare).
 - Side venture: elioo studio, eliooo.org.
 - Education: BSc in Computer Science and Engineering, CUET, 2015 to 2019.

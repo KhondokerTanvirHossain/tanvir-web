@@ -190,7 +190,7 @@
 /* Pinned product show (show.js adds .is-live). Each chapter is a full-screen layer driven by
    --layer, --world, --copy and --copy-y; only transform and opacity animate. */
 .tp-show.is-live { position: relative; height: 800vh; }
-.tp-show.is-live .tp-show__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; contain: paint; background: var(--stage); }
+.tp-show.is-live .tp-show__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; contain: paint; background: var(--stage); }
 .tp-show.is-live .tp-chapter { position: absolute; inset: 0; opacity: var(--layer, 0); }
 .tp-show.is-live .tp-chapter::before { opacity: var(--world, 1); }
 .tp-show.is-live .tp-chapter__inner { height: 100%; padding-block: 84px 104px; }
@@ -203,7 +203,7 @@
 .tp-rail button i { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.16); transform-origin: left; transform: scaleX(var(--fill, 0)); }
 .tp-rail button.is-on { color: var(--ink); }
 @media (max-width: 820px) {
-  .tp-show.is-live .tp-chapter__inner { padding-block: 64px 88px; align-content: center; }
+  .tp-show.is-live .tp-chapter__inner { padding-block: 60px 84px; align-content: center; gap: var(--space-4); }
   .tp-show.is-live .tp-rail button { padding: 0 10px; font-size: 13px; }
 }
 @media (prefers-reduced-transparency: reduce) { .tp-show.is-live .tp-rail { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
@@ -216,3 +216,18 @@
 .tp-chapter--medioo .tp-play { background: var(--medioo-link); color: #00313a; }
 .tp-chapter--finioo .tp-play { background: var(--finioo-ember); color: var(--finioo-on-ember); }
 .tp-chapter--intellidrugs .tp-play { background: var(--intellidrugs-link); color: var(--intellidrugs-on-link); }
+
+/* Short screens (landscape phones, small phones): keep the link and the film clear of the rail and the viewport. */
+@media (max-height: 700px) and (max-width: 820px) {
+  .tp-show.is-live .tp-chapter__lede, .tp-show.is-live .tp-chapter__meta { display: none; }
+  .tp-show.is-live .tp-chapter__title { font-size: 26px; }
+  .tp-show.is-live .tp-chapter__cta { margin-top: var(--space-3); }
+}
+@media (max-height: 560px) {
+  .tp-show.is-live .tp-rail { display: none; }
+  .tp-show.is-live .tp-chapter__inner { padding-block: 64px 24px; gap: var(--space-8); }
+  .tp-show.is-live .tp-chapter__lede, .tp-show.is-live .tp-chapter__meta { display: none; }
+  .tp-show.is-live .tp-chapter__title { font-size: 26px; }
+  .tp-show.is-live .tp-chapter__cta { margin-top: var(--space-3); }
+  .tp-show.is-live .tp-film { max-height: calc(100svh - 96px); justify-self: center; height: auto; width: auto; aspect-ratio: 16 / 10; }
+}

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { showState, filmTransform, chapterVars, PHASES } from '../show.js';
+import { showState, filmTransform, chapterVars, holdProgress, PHASES } from '../show.js';
 
 test('start: small film, nothing settled, Bolo active', () => {
   const s = showState(0, 4);
@@ -46,8 +46,14 @@ test('film transform: small, full, framed', () => {
   assert.deepEqual(filmTransform({ expand: 1, settle: 1 }, g), { scale: 1, x: 0, y: 0, radius: 28 });
 });
 
-test('hidden chapters are inert', () => {
-  const s = showState(PHASES.settleEnd + (1 - PHASES.settleEnd) / 3, 4); // Medioo fully in, no mixing
-  assert.equal(chapterVars(s.active, s).inert, false);
-  assert.equal(chapterVars((s.active + 2) % 4, s).inert, true);
+test('hidden chapters let clicks through to the visible one', () => {
+  const s = showState(holdProgress(1, 4), 4); // Medioo fully in, no mixing
+  assert.equal(chapterVars(s.active, s).hidden, false);
+  assert.equal(chapterVars((s.active + 2) % 4, s).hidden, true);
+});
+
+test('holdProgress: where each product is fully in', () => {
+  assert.equal(holdProgress(0, 4), PHASES.settleEnd);
+  assert.equal(holdProgress(3, 4), 1);
+  const s = showState(holdProgress(2, 4), 4); assert.equal(s.active, 2); assert.equal(s.mix, 0);
 });

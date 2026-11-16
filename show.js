@@ -26,6 +26,12 @@ export function showState(progress, count, { reduce = false } = {}) {
   return { expand, settle, index, mix, t, active: Math.round(t) };
 }
 
+/** Scroll progress at which product k is fully in, with no mixing (its hold point). */
+export function holdProgress(k, count) {
+  if (k >= count - 1) return 1;
+  return PHASES.settleEnd + ((1 - PHASES.settleEnd) * k) / (count - 1);
+}
+
 /** Where the first film sits: small and centred, full screen, or in its frame. Radius is pre-divided by scale. */
 export function filmTransform(state, geom) {
   let scale; let x; let y; let visible;
@@ -37,12 +43,13 @@ export function filmTransform(state, geom) {
   return { scale, x, y, radius: Math.round((visible / scale) * 1000) / 1000 };
 }
 
-/** Per-chapter custom properties. The incoming layer fades in over an opaque outgoing one, so nothing dips. */
+/** Per-chapter custom properties. The incoming layer fades in over an opaque outgoing one, so nothing dips.
+    `hidden` chapters let pointer events through; they stay in the accessibility tree and in Tab order. */
 export function chapterVars(k, state) {
   const layer = k === state.index ? 1 : k === state.index + 1 ? state.mix : 0;
   const world = k === 0 && state.index === 0 ? state.expand : 1;
   const copy = clamp(1 - Math.abs(state.t - k) * 2.2) * (k === 0 ? clamp((state.settle - 0.5) / 0.5) : 1);
-  return { layer, world, copy, copyY: -(state.t - k) * 40, inert: copy < 0.5 };
+  return { layer, world, copy, copyY: -(state.t - k) * 40, hidden: layer < 0.5 };
 }
 
 export function initShow(root) {
@@ -85,8 +92,12 @@ export function initShow(root) {
       ch.style.setProperty('--world', v.world);
       ch.style.setProperty('--copy', v.copy);
       ch.style.setProperty('--copy-y', v.copyY.toFixed(2));
-      ch.inert = v.inert;
+      ch.style.pointerEvents = v.hidden ? 'none' : '';
     });
+    if (root.dataset.active !== String(s.active)) {
+      root.dataset.active = String(s.active);
+      root.dispatchEvent(new CustomEvent('tp:active', { bubbles: true, detail: { index: s.active } }));
+    }
     const f = filmTransform(s, geom);
     film.style.transform = `translate3d(${f.x}px, ${f.y}px, 0) scale(${f.scale})`;
     film.style.borderRadius = `${f.radius}px`;
@@ -94,7 +105,7 @@ export function initShow(root) {
     if (rail) {
       const shown = clamp((s.settle - 0.6) / 0.4);
       rail.style.opacity = shown;
-      rail.inert = shown < 0.5;
+      rail.style.pointerEvents = shown < 0.5 ? 'none' : '';
     }
     railButtons.forEach((b, k) => {
       b.classList.toggle('is-on', k === s.active);
@@ -103,12 +114,19 @@ export function initShow(root) {
     });
   }
 
-  railButtons.forEach((b) => b.addEventListener('click', () => {
-    const k = Number(b.dataset.index);
+  const scrollToProduct = (k, behavior) => {
     const span = root.offsetHeight - win.innerHeight;
     const top = win.scrollY + root.getBoundingClientRect().top;
-    win.scrollTo({ top: top + span * (PHASES.settleEnd + ((1 - PHASES.settleEnd) * k) / (count - 1)) + 2, behavior: reduce ? 'auto' : 'smooth' });
+    win.scrollTo({ top: top + span * holdProgress(k, count) + 2, behavior });
+  };
+  railButtons.forEach((b) => b.addEventListener('click', () => scrollToProduct(Number(b.dataset.index), reduce ? 'auto' : 'smooth')));
+  // Keyboard and screen-reader focus brings its product into view, so every product is reachable in order.
+  chapters.forEach((ch, k) => ch.addEventListener('focusin', () => {
+    if (Math.abs(showState(progress(), count, { reduce }).t - k) > 0.01) scrollToProduct(k, 'auto');
   }));
+  rail?.addEventListener('focusin', () => {
+    if (showState(progress(), count, { reduce }).settle < 1) scrollToProduct(0, 'auto');
+  });
 
   let queued = false;
   win.addEventListener('scroll', () => {

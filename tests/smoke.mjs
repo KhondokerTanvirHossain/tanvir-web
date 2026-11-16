@@ -2,11 +2,12 @@
 // Starts a static server, drives Chrome over the DevTools protocol, prints PASS/FAIL per check, exits 1 on any failure.
 // CHROME_PATH overrides the browser (CI: google-chrome).
 import { spawn } from 'node:child_process';
-import { mkdtempSync } from 'node:fs';
+import { mkdtempSync, cpSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { showState, PHASES } from '../show.js';
+import { showState, holdProgress, PHASES } from '../show.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -42,7 +43,8 @@ try {
     return r.result?.result?.value;
   };
   const viewport = (w, h) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile: w < 600 });
-  const load = async (path = '') => { await send('Page.navigate', { url: BASE + path }); await sleep(2500); };
+  const load = async (path = '', base = BASE) => { await send('Page.navigate', { url: base + path }); await sleep(2500); };
+  const tab = async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); await sleep(650); };
   const scrollShow = async (p) => {
     await ev(`(() => { const s = document.querySelector('.tp-show'); const top = s.getBoundingClientRect().top + scrollY; scrollTo(0, top + (s.offsetHeight - innerHeight) * ${p}); })()`);
     await sleep(450);
@@ -71,13 +73,23 @@ try {
     const navH = await ev(`document.querySelector('.tp-nav').getBoundingClientRect().height`);
     check(`${tag} nav is 52px inside the show`, Math.round(navH) === 52, `${navH}`);
 
-    // 4. At each product's hold point that chapter is fully in and its link is the only reachable one.
+    // 4. Keyboard: Tab from the client strip reaches each product's link in order, on screen in a fully shown chapter,
+    //    and a click at that spot lands on that link (hidden chapters must not swallow it).
+    await ev(`document.querySelector('.tp-marquee').focus()`);
     for (let k = 0; k < 4; k++) {
-      await scrollShow(PHASES.settleEnd + ((1 - PHASES.settleEnd) * k) / 3 + 0.01);
-      const r = await ev(`(() => { const ch = [...document.querySelectorAll('.tp-chapter')]; const live = ch.filter((c) => !c.inert);
-        return { layer: getComputedStyle(ch[${k}]).getPropertyValue('--layer').trim(), live: live.map((c) => ch.indexOf(c)) }; })()`);
-      check(`${tag} chapter ${k} in, only its link reachable`, r.layer === '1' && r.live.length === 1 && r.live[0] === k, JSON.stringify(r));
+      await tab();
+      const r = await ev(`(() => { const a = document.activeElement; const ch = [...document.querySelectorAll('.tp-chapter')]; const i = ch.findIndex((c) => c.contains(a));
+        const b = a.getBoundingClientRect(); const hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+        return { i, cta: a.classList.contains('tp-chapter__cta'), layer: i >= 0 ? getComputedStyle(ch[i]).getPropertyValue('--layer').trim() : null,
+          onScreen: b.top >= 0 && b.bottom <= innerHeight, hit: !!hit && hit.closest('a') === a }; })()`);
+      check(`${tag} Tab reaches product ${k} and it is clickable`, r.i === k && r.cta && r.layer === '1' && r.onScreen && r.hit, JSON.stringify(r));
     }
+
+    // 4b. Tabbing into the nav while it is tucked away over the hero brings it into view.
+    await ev(`scrollTo(0,0); document.querySelector('.skip').focus()`); await sleep(300);
+    await tab();
+    const navFocus = await ev(`(() => { const n = document.querySelector('.tp-nav'); return { inNav: n.contains(document.activeElement), top: Math.round(n.getBoundingClientRect().top) }; })()`);
+    check(`${tag} focused nav is visible`, navFocus.inNav && navFocus.top >= 0, JSON.stringify(navFocus));
 
     // 5. Reloading mid-show paints the right product straight away.
     await scrollShow(0.62);
@@ -85,6 +97,49 @@ try {
     const after = await ev(`(() => { const s = document.querySelector('.tp-show'); const span = s.offsetHeight - innerHeight;
       return { p: Math.min(1, Math.max(0, -s.getBoundingClientRect().top / span)), on: [...document.querySelectorAll('.tp-rail button')].findIndex((b) => b.classList.contains('is-on')) }; })()`);
     check(`${tag} reload mid-show shows the right product`, after.on === showState(after.p, 4).active, JSON.stringify(after));
+  }
+
+  // 4c. Short and landscape screens: at each hold the product link and the film clear the rail and the viewport.
+  for (const [w, h] of [[844, 390], [375, 548]]) {
+    await viewport(w, h); await load();
+    for (let k = 0; k < 4; k++) {
+      await scrollShow(holdProgress(k, 4) + 0.003);
+      const r = await ev(`(() => { const ch = document.querySelectorAll('.tp-chapter')[${k}]; const a = ch.querySelector('.tp-chapter__cta').getBoundingClientRect();
+        const f = ch.querySelector('.tp-film').getBoundingClientRect(); const rail = document.querySelector('.tp-rail'); const rr = rail.getBoundingClientRect();
+        const railOn = parseFloat(getComputedStyle(rail).opacity) > 0.5; const clear = (b) => !railOn || b.bottom <= rr.top + 1 || b.right <= rr.left || b.left >= rr.right;
+        return { link: a.bottom <= innerHeight && clear(a), film: f.bottom <= innerHeight + 1 && clear(f), a: Math.round(a.bottom), f: Math.round(f.bottom), rail: Math.round(rr.top) }; })()`);
+      check(`${w}x${h} product ${k} link and film clear the rail`, r.link && r.film, JSON.stringify(r));
+    }
+  }
+
+  // 4d. Films: a missing WebM falls back to the MP4, and only the visible product's film plays.
+  if ((() => { try { execFileSync('ffmpeg', ['-version'], { stdio: 'ignore' }); return true; } catch { return false; } })()) {
+    const site = mkdtempSync(join(tmpdir(), 'smoke-site-'));
+    for (const f of ['index.html', 'styles.css', 'home.css', 'main.js', 'overview.js', 'show.js', 'films.js', 'favicon.svg']) cpSync(join(ROOT, f), join(site, f));
+    cpSync(join(ROOT, 'assets'), join(site, 'assets'), { recursive: true, filter: (src) => !src.includes('/src') });
+    mkdirSync(join(site, 'assets/films'), { recursive: true });
+    const clip = (out, codec) => execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=purple:s=320x200:d=2', '-c:v', codec, '-pix_fmt', 'yuv420p', ...(codec === 'libx264' ? ['-movflags', '+faststart'] : []), out]);
+    clip(join(site, 'assets/films/bolo.mp4'), 'libx264'); // no bolo.webm on purpose
+    clip(join(site, 'assets/films/medioo.webm'), 'libvpx-vp9');
+    clip(join(site, 'assets/films/medioo.mp4'), 'libx264');
+    for (const n of ['bolo', 'medioo']) execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=purple:s=320x200', '-frames:v', '1', join(site, `assets/films/${n}-poster.jpg`)]);
+    const errorsBefore = errors.length; // the fixture's missing bolo.webm 404 is deliberate
+    writeFileSync(join(site, 'index.html'), readFileSync(join(site, 'index.html'), 'utf8').replace('data-film="bolo"', 'data-film="bolo" data-film-ready').replace('data-film="medioo"', 'data-film="medioo" data-film-ready'));
+    const films = spawn('python3', ['-m', 'http.server', '4183', '--bind', '127.0.0.1'], { cwd: site, stdio: 'ignore' });
+    try {
+      await sleep(800);
+      await viewport(1440, 900); await load('', 'http://127.0.0.1:4183/');
+      const state = `(() => { const v = (n) => document.querySelector('[data-film=' + n + '] video'); return { bolo: v('bolo') ? (v('bolo').paused ? 'paused' : 'playing') : 'gone', medioo: v('medioo') ? (v('medioo').paused ? 'paused' : 'playing') : 'gone' }; })()`;
+      await scrollShow(holdProgress(0, 4) + 0.003); await sleep(3000);
+      const atBolo = await ev(state);
+      check('film: missing WebM falls back to MP4', atBolo.bolo === 'playing', JSON.stringify(atBolo));
+      check('film: hidden product does not play', atBolo.medioo !== 'playing', JSON.stringify(atBolo));
+      await scrollShow(holdProgress(1, 4) + 0.003); await sleep(1500);
+      const atMedioo = await ev(state);
+      check('film: only the visible product plays', atMedioo.medioo === 'playing' && atMedioo.bolo !== 'playing', JSON.stringify(atMedioo));
+    } finally { films.kill(); errors.length = errorsBefore; }
+  } else {
+    console.log('INFO  ffmpeg not found: film checks skipped');
   }
 
   // 6. Resizing mid-show re-measures the film: at the full-screen hold it still covers the stage.

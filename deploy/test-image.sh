@@ -30,7 +30,10 @@ expect_code /Tanvir_Hossain_Engineering_Lead.pdf 200
 [ "$(header / X-Frame-Options)" = DENY ] && ok "X-Frame-Options DENY" || bad "X-Frame-Options missing"
 [ "$(header / Referrer-Policy)" = strict-origin-when-cross-origin ] && ok "Referrer-Policy" || bad "Referrer-Policy missing"
 [ "$(header / Cache-Control)" = no-cache ] && ok "HTML is no-cache" || bad "HTML Cache-Control is '$(header / Cache-Control)'"
-[ "$(header /styles.css Cache-Control)" = "public, max-age=3600" ] && ok "CSS cached 1h" || bad "CSS Cache-Control is '$(header /styles.css Cache-Control)'"
+[ "$(header /styles.css Cache-Control)" = no-cache ] && ok "CSS revalidates (no-cache)" || bad "CSS Cache-Control is '$(header /styles.css Cache-Control)'"
+[ "$(header /show.js Cache-Control)" = no-cache ] && ok "JS revalidates (no-cache)" || bad "JS Cache-Control is '$(header /show.js Cache-Control)'"
+[ "$(header /assets/portrait-720.jpg Cache-Control)" = "public, max-age=3600" ] && ok "images cached 1h" || bad "image Cache-Control is '$(header /assets/portrait-720.jpg Cache-Control)'"
+[ "$(code /Tanvir_Hossain_Senior_Software_Engineer.pdf)" = 301 ] && header /Tanvir_Hossain_Senior_Software_Engineer.pdf Location | grep -q '/resume\.pdf$' && ok "old résumé PDF → 301 /resume.pdf" || bad "old résumé PDF link is broken"
 [ -z "$(header / Server | grep -i '[0-9]')" ] && ok "no server version" || bad "Server header leaks a version"
 for private in /docs/ /tests/smoke.mjs /content/facts.md /assets/src/portrait-studio.png /Dockerfile /design/tokens.json /package.json /README.md /.git/HEAD; do
   expect_code "$private" 404
