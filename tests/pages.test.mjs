@@ -36,7 +36,7 @@ for (const p of PAGES) {
     assert.equal((html.match(/<h1[\s>]/g) || []).length, 1, 'exactly one h1');
     assert.match(html, /<a class="skip" href="#main">/);
     assert.match(html, /<main id="main"/);
-    assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/);
+    assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1(, viewport-fit=cover)?">/);
   });
 }
 
@@ -52,28 +52,43 @@ test('styles.css carries the design tokens verbatim', () => {
   assert.match(read('resume.html'), /href="resume\.css"/);
 });
 
-test('home: sections in order and four case-study links', () => {
-  inOrder(home, ['id="top"', 'id="work"', 'id="how"', 'id="stack"', 'id="elioo"', 'id="timeline"', 'id="contact"']);
-  for (const w of WORK) assert.match(home, new RegExp(`href="${w.replace('.html', '')}"`), w);
+const sec = (id) => home.slice(home.indexOf(`id="${id}"`), home.indexOf('</section>', home.indexOf(`id="${id}"`)));
+test('home: sections in order', () => inOrder(home, ['id="hero"', 'id="overview"', 'id="products"', 'class="tp-show"', 'id="work"', 'id="lead"', 'id="about"', 'id="contact"']));
+test('home: hero states the role and the résumé', () => {
+  assert.match(home, /<h1[^>]*>I lead the team\. And ship the whole product\.<\/h1>/);
+  assert.match(sec('hero'), /Open to remote Engineering Lead roles/);
+  assert.match(sec('hero'), /href="resume\.pdf"/);
+  assert.match(sec('hero'), /25 engineers/);
+  assert.match(sec('hero'), /patient-first/);
+  assert.match(sec('hero'), /<img[^>]+portrait-1086\.jpg[^>]+alt="Tanvir Hossain/);
 });
-
-test('home: proof figures trace to facts', () => {
-  for (const [shown, source] of [['583K+', '583K+'], ['$1.8B', '1.82B'], ['99.99%', '99.99%'], ['100%', '100% pass']]) {
-    assert.ok(home.includes(shown), `home shows ${shown}`);
-    assert.ok(facts.includes(source), `facts contain ${source}`);
+test('home: four product chapters with their live links', () => {
+  for (const [p, url] of [['bolo', 'https://bolo.eliooo.org/'], ['medioo', 'https://medioo.eliooo.org/'], ['finioo', 'https://finioo.eliooo.org/'], ['intellidrugs', 'https://drugdb.eliooo.org/']]) {
+    assert.match(home, new RegExp(`tp-chapter--${p}`)); assert.ok(home.includes(`href="${url}"`), url); assert.match(home, new RegExp(`data-film="${p}"`));
+  }
+  assert.match(home, /Launching soon/);
+  assert.match(home, /honest about what it doesn.t know/);
+});
+test('home: every figure traces to facts', () => {
+  for (const [shown, source] of [['25', '25 engineers'], ['583K+', '583K+'], ['$1.8B', '1.82B'], ['99.99%', '99.99%'], ['600K+', '600,000+'], ['100%', '100% pass']]) {
+    assert.ok(home.includes(shown), shown); assert.ok(facts.includes(source), source);
   }
 });
-
-test('home: how, stack, elioo, timeline, contact', () => {
-  const sec = (id) => home.slice(home.indexOf(`id="${id}"`), home.indexOf('</section>', home.indexOf(`id="${id}"`)));
-  assert.equal((sec('how').match(/<h3/g) || []).length, 4);
-  assert.equal((sec('stack').match(/<h3/g) || []).length, 4);
-  assert.match(sec('elioo'), /href="https:\/\/eliooo\.org"/);
-  assert.equal((sec('timeline').match(/<li/g) || []).length, 7);
-  assert.match(sec('contact'), /mailto:k\.tanvir\.hossain@gmail\.com/);
-  assert.match(sec('contact'), /github\.com\/KhondokerTanvirHossain/);
-  assert.match(sec('contact'), /linkedin\.com\/in\/k-tanvir-hossain/);
+test('home: quotes are real and traced', () => {
+  assert.doesNotMatch(home, /Example|Name Surname/);
+  const names = [...home.matchAll(/class="tp-quote__name">([^<]+)</g)].map((m) => m[1]);
+  assert.equal(names.length, 2);
+  for (const n of names) assert.ok(facts.includes(n), n);
 });
+test('home: client cards link case studies, contact is complete', () => {
+  for (const w of WORK) assert.ok(sec('work').includes(`href="${w.replace('.html', '')}"`), w);
+  assert.match(sec('contact'), /mailto:k\.tanvir\.hossain@gmail\.com/);
+  assert.match(sec('contact'), />k\.tanvir\.hossain@gmail\.com/);
+  assert.match(home, /linkedin\.com\/in\/k-tanvir-hossain/);
+  assert.match(home, /github\.com\/KhondokerTanvirHossain/);
+  assert.match(sec('about'), /href="https:\/\/eliooo\.org"/);
+});
+test('home does not say doctor-first', () => assert.doesNotMatch(home, /doctor-first/i));
 
 for (const w of WORK) {
   test(`${w}: case study structure`, () => {

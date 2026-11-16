@@ -1,0 +1,368 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/direction.html"
+        ],
+        "createdAt": "2026-11-16T18:26:21.468Z",
+        "reason": "Claude: scaled-down thumbnail mockups in a throwaway brainstorm screen"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/direction.html"
+        ],
+        "createdAt": "2026-11-16T18:26:21.501Z",
+        "reason": "Claude: Bolo design system's shadow-glow token (the sun's glow) reproduced in a brainstorm mockup"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/direction.html"
+        ],
+        "createdAt": "2026-11-16T18:26:21.534Z",
+        "reason": "Claude: throwaway brainstorm thumbnail mockup; final build gets contrast tests"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/direction.html"
+        ],
+        "createdAt": "2026-11-16T18:26:31.020Z",
+        "reason": "Claude: scaled-down thumbnail mockups in a throwaway brainstorm screen, not shipped UI"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:16.853Z",
+        "reason": "Claude: throwaway brainstorm mockup shown via CSS zoom; contrast over Bolo's rose horizon is noted as a build requirement"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:16.881Z",
+        "reason": "Claude: throwaway brainstorm mockup shown via CSS zoom; contrast over Bolo's rose horizon is noted as a build requirement"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:16.909Z",
+        "reason": "Claude: throwaway brainstorm mockup shown via CSS zoom; contrast over Bolo's rose horizon is noted as a build requirement"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:16.937Z",
+        "reason": "Claude: throwaway brainstorm mockup shown via CSS zoom; contrast over Bolo's rose horizon is noted as a build requirement"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:27.723Z",
+        "reason": "Claude: throwaway brainstorm mockup; headline size is an open design question for the user, tuned in the real build"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/chapters-v2.html"
+        ],
+        "createdAt": "2026-11-16T18:32:27.748Z",
+        "reason": "Claude: throwaway brainstorm mockup; headline size is an open design question for the user, tuned in the real build"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:40:02.793Z",
+        "reason": "Claude: Bolo design system's sun glow (shadow-glow / আভা) in the Bolo poster"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:40:02.822Z",
+        "reason": "Claude: chapters and films clip decorative scene shapes (sun, hills, stars) on purpose; no popovers inside"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:40:02.851Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:23.664Z",
+        "reason": "Claude: Bolo design system's sun glow in the Bolo poster"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:23.691Z",
+        "reason": "Claude: stage/film containers clip decorative scene shapes on purpose; no popovers inside"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.512Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.553Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.589Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/full-desktop.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.628Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.703Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.738Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.788Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.829Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion.html"
+        ],
+        "createdAt": "2026-11-16T18:57:39.871Z",
+        "reason": "Claude: throwaway brainstorm mockup; hero size is checked in the build against the README rule (résumé button visible at 1280x800 and 390x844), row rules are list dividers not boxed containers"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:53.893Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:53.921Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:53.952Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:53.987Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:54.034Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:54.063Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/motion-v2.html"
+        ],
+        "createdAt": "2026-11-16T19:13:54.094Z",
+        "reason": "Claude: throwaway motion prototype; Bolo sun glow is from Bolo's design system; real build is checked separately"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.170Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.200Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.227Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.261Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.304Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.332Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:30:59.359Z",
+        "reason": "Claude: throwaway prototype; Bolo sun glow is from Bolo's design system (shadow-glow); real build gets its own checks"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/26477-1794853494/content/site.html"
+        ],
+        "createdAt": "2026-11-16T19:42:24.324Z",
+        "reason": "user confirmed: asked for the michaelpumo-style section with a scrolling logo strip and tech ticker; stops under reduced motion, build adds pause on hover"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T20:15:45.287Z",
+        "reason": "Claude: chapters and film frames clip decorative scene shapes (sun, hills, phone mock) on purpose; no tooltips or menus inside"
+      }
+    ]
+  }
+}
