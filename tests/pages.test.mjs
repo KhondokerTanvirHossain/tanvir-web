@@ -111,3 +111,19 @@ test('seo: sitemap and person schema', () => {
   assert.equal((sm.match(/<loc>/g) || []).length, 6);
   assert.match(home, /"@type":\s*"Person"/);
 });
+
+test('facts: products, availability, recommendations, Better Health', () => {
+  for (const s of ['## Products', 'https://bolo.eliooo.org/', 'https://medioo.eliooo.org/', 'https://finioo.eliooo.org/', 'https://drugdb.eliooo.org/', 'Launching soon',
+    '## Availability', '8am to 12pm US Eastern', '## Recommendations', 'Heronmoy Emon', 'Asiya Khatun Papiya', '25 engineers across four streams', 'patient-first'])
+    assert.ok(facts.includes(s), `facts.md lacks: ${s}`);
+  assert.doesNotMatch(facts, /~20 engineers/);
+});
+
+test('design tokens: every text pair named for contrast meets AA', () => {
+  const t = JSON.parse(read('design/tokens.json'));
+  const v = Object.fromEntries(t.color.tokens.map((x) => [x.name, x.value]));
+  for (const [fg, bg, min] of [['ink', 'stage', 4.5], ['ink-2', 'stage', 4.5], ['ink-3', 'stage', 4.5], ['ink-2', 'surface', 4.5], ['ink-3', 'surface', 4.5], ['link', 'stage', 4.5],
+    ['bolo-ink', 'bolo-sky-high', 4.5], ['bolo-ink', 'bolo-sky-mid', 4.5], ['bolo-link', 'bolo-sky-high', 4.5], ['medioo-ink', 'medioo-ground', 4.5], ['medioo-link', 'medioo-ground', 4.5],
+    ['finioo-ink', 'finioo-ground', 4.5], ['finioo-ink-2', 'finioo-ground', 4.5], ['intellidrugs-ink', 'intellidrugs-ground', 4.5], ['intellidrugs-link', 'intellidrugs-ground', 4.5]])
+    assert.ok(contrast(v[fg], v[bg]) >= min, `${fg} on ${bg}: ${contrast(v[fg], v[bg]).toFixed(2)}`);
+});

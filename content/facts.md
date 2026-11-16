@@ -16,7 +16,7 @@ Single source of truth. Every claim on the site and in the PDF traces back to a 
 
 | Period | Role | Where |
 |---|---|---|
-| Oct 2025 to present | Senior Software Engineer, product and platform owner, Better Health | Celloscope |
+| Oct 2025 to present | Engineering Lead, product and platform, Better Health (current title; LinkedIn updated to match. Formerly listed as Senior Software Engineer, product and platform owner) | Celloscope |
 | Jul 2024 to Sep 2025 (assumed) | Senior Software Engineer, engineering manager and architect (client title: Technical Product Manager), Primefocus Health | Celloscope |
 | May 2023 to Jun 2024 (assumed) | Team Lead, MRA-IMS | Celloscope |
 | Sep 2021 to Apr 2023 | Software Engineer, Internet Banking | Celloscope |
@@ -57,13 +57,13 @@ Single source of truth. Every claim on the site and in the PDF traces back to a 
 
 ## Case study 4: Better Health, Celloscope's own product
 
-- Period Oct 2025 to present. Product lineage bdEMR to Niramoy to Better Health (rebrand July 2026). Doctor-first digital prescription and clinical encounter platform for Bangladesh.
+- Period Oct 2025 to present. Product lineage bdEMR to Niramoy to Better Health (rebrand July 2026). Positioning: a patient-first health platform for Bangladesh. It was designed for patients; built in order: e-prescriptions (eRx) for doctors, then telemedicine, now the patient's lifelong health record (LHR).
 - Thesis: free voice-enabled prescription tool drives doctor adoption, creates patient accounts, then telemedicine and patient-owned EMR.
 - Built as of Sep 2026: Prescription and Telemedicine modules, appointments, doctor dashboard, patient records.
 - Prescription: schema-driven Rx engine with 18 dosage-form classes and Bangla dosing vocabulary; 27,000+ DGDA-verified medicines; 45,000+ chief-complaint terms with AI standardisation; lab panels with age and sex reference ranges; report OCR; two-column A4 print for pre-printed pads.
 - Voice and AI: speech-to-text across seven prescription sections, Bangla, English and mixed. Gateway service owns AI I/O tracing, edit capture and PHI redaction. Accuracy pipeline measures WER and extraction precision, recall and F1 with a zero-tolerance gate for critical errors (wrong drug, dose, side, negation). In-house ~30M-parameter extraction model A/B tested against a hosted LLM. SNOMED CT (~150K codes), ICD-10, CPT loaded. No autonomous diagnosis, no dosing suggestions.
 - Architecture: Keycloak OIDC; Java 21, Spring Boot 3 WebFlux, R2DBC, hexagonal, reactive-only; some .NET Core services; Python speech platform; Angular portals; five physically separate PostgreSQL clusters; Debezium CDC to Kafka (KRaft) to consolidated analytics PostgreSQL with PHI excluded at source; MinIO; Vault with Vault Secrets Operator. Idempotency framework, Redis invalidate-on-write caching, effectively-once Kafka consumers, publish-after-commit. Migrated Docker Swarm to K3s: Helm, Traefik, WAF, Cloudflare, GitLab CI/CD. Fluent Bit, Graylog, Elasticsearch, Prometheus, Grafana, Tempo, Zipkin, OTel, Locust.
-- Delivery: five Jira Scrum boards (Prescription, Telemedicine, Platform Engineering, Prescription AI, consolidated product backlog), two-week sprints, ~20 engineers across four streams. Definition of Done: a real doctor completes a prescription unassisted on production.
+- Delivery: five Jira Scrum boards (Prescription, Telemedicine, Platform Engineering, Prescription AI, consolidated product backlog), two-week sprints, 25 engineers across four streams. Definition of Done: a real doctor completes a prescription unassisted on production.
 - Tanvir's contributions:
   - Product: prescription-first strategy and three-track build sequence; Doctor Portal PRD (~300 pages, 14 modules); Speech-to-Text PRD; Gherkin acceptance criteria; 60 epics and 215+ stories backlog consolidation; clinical dosing research schema; terminology standards selection; rebrand to Better Health.
   - Engineering: designed the Debezium to Kafka to analytics-Postgres CDC pipeline and fixed Kafka Connect OOM, TOAST/JSONB and SMT issues; built Angular plus Agora video consultation (auth guards, routing, tokens); designed the Bengali-first clinical encounter UI; operated Swarm and K3s, PostgreSQL, Vault, observability; security and compliance track (Bangladesh PDPO 2025, PHI handling, de-identification before LLM calls).
@@ -81,3 +81,23 @@ Single source of truth. Every claim on the site and in the PDF traces back to a 
 ## LinkedIn gap
 
 Better Health is not on LinkedIn yet. Deliverable: a LinkedIn Experience entry (title, dates, description under 2,000 characters) drafted from case study 4.
+
+## Products
+
+All four designed, built and run by Tanvir alone, under the elioo studio (https://eliooo.org).
+
+- Bolo, https://bolo.eliooo.org/, live: a voice-first speaking buddy for Bangla speakers who know English on paper but freeze when they speak.
+- Medioo, https://medioo.eliooo.org/, live: keeps a family's medical papers and says what is written on them in plain Bangla; code decides urgency, numbers and medicines, the model only words what code has checked.
+- Finioo, https://finioo.eliooo.org/, not live yet (link kept on purpose, status "Launching soon"): an AI co-pilot that builds and runs a founder's business model.
+- IntelliDrugs, https://drugdb.eliooo.org/, live: Bangladesh's drug and interaction database with pharmacist review, honest about what it doesn't know.
+
+## Availability
+
+Open to remote roles with US and Canadian product teams. Keeps 8am to 12pm US Eastern open for overlap. Worked daily with a US client's leadership (Primefocus Health).
+
+## Recommendations
+
+Quoted verbatim from LinkedIn; an ellipsis marks a cut.
+
+- Heronmoy Emon, Backend Software Engineer. Worked with Tanvir on the same team (teammate and mentee). April 29, 2025: "As a team lead, he demonstrates exceptional leadership - blending deep technical expertise with a collaborative and supportive approach that brings out the best in everyone on the team."
+- Asiya Khatun Papiya, Human Resource Administrator (Technical Recruiter). Managed Tanvir directly. April 28, 2025: "He has master level grips over Spring Boot, System Architecture, Cloud Native. … He is a super genius in problem solving, team management, task management, hiring and mentoring."
