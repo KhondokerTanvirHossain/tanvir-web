@@ -1,0 +1,19 @@
+# tanvir-web on the EC2 box. Lives at ~/tanvir-web/compose.yml (copied there by the deploy workflow).
+# Caddy (n8n stack) reaches it as tanvir-web:80 on the shared n8n_edge network; no ports are published.
+services:
+  tanvir-web:
+    image: ghcr.io/khondokertanvirhossain/tanvir-web:${IMAGE_TAG:?IMAGE_TAG is required}
+    container_name: tanvir-web
+    restart: unless-stopped
+    mem_limit: 64m
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    networks: [edge]
+
+networks:
+  edge:
+    external: true
+    name: n8n_edge

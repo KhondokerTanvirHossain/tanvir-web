@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lint and unit tests
+        run: npm run check
+      - name: Browser smoke test
+        run: npm run smoke
+        env:
+          CHROME_PATH: google-chrome
+      - name: Image test
+        run: bash deploy/test-image.sh

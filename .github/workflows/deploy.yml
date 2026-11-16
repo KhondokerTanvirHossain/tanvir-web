@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/khondokertanvirhossain/tanvir-web
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run check
+      - run: npm run smoke
+        env:
+          CHROME_PATH: google-chrome
+      - run: bash deploy/test-image.sh
+
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE }}:${{ github.sha }}
+      - name: Deploy to EC2
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
+          KEY: ${{ secrets.EC2_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.EC2_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s\n' "$KEY" > key
+          if [ -n "$KNOWN_HOSTS" ]; then printf '%s\n' "$KNOWN_HOSTS" > known_hosts; check="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=known_hosts"; else check="-o StrictHostKeyChecking=accept-new"; fi
+          opts="-i key -o ConnectTimeout=20 $check"
+          ssh $opts "$USER@$HOST" 'mkdir -p ~/tanvir-web'
+          scp $opts deploy/compose.yml deploy/deploy.sh "$USER@$HOST:~/tanvir-web/"
+          ssh $opts "$USER@$HOST" "IMAGE_TAG=${{ github.sha }} bash ~/tanvir-web/deploy.sh"
+          rm -f key known_hosts

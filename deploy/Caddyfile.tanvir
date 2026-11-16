@@ -1,0 +1,22 @@
+# tanvir-web site blocks for /home/ec2-user/n8n/Caddyfile (shared with n8n, medioo, drugdb and bolo).
+# Apply only this way: back up the Caddyfile, append, `caddy validate`, `caddy reload`, then check every other site.
+
+# Preview while DNS still points at Vercel (sslip.io resolves this name to the box's IP).
+tanvir.13-205-14-249.sslip.io {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+	reverse_proxy tanvir-web:80
+}
+
+# Live domain: uncomment once `dig +short tanvir.eliooo.org` returns 13.205.14.249.
+# tanvir.eliooo.org {
+# 	encode zstd gzip
+# 	header {
+# 		Strict-Transport-Security "max-age=31536000"
+# 		-Server
+# 	}
+# 	reverse_proxy tanvir-web:80
+# }
