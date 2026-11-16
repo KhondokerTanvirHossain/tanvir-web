@@ -135,7 +135,7 @@ h1, h2, h3 { text-wrap: balance; }
 .prose b, .prose strong { color: var(--ink); font-weight: 600; }
 .prose a { color: var(--link); }
 .diagram { margin: var(--space-4) 0 var(--space-6); padding: var(--space-6); border-radius: var(--radius-card); background: #f5f5f7; overflow-x: auto; }
-.diagram svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.diagram svg { display: block; width: 100%; min-width: 560px; height: auto; font-family: "Source Sans 3", system-ui, sans-serif; letter-spacing: 0; }
 .outcome-list { list-style: none; padding: 0; margin: 0 0 var(--space-4); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .outcome-list li { padding: var(--space-4) var(--space-6); border-radius: var(--radius-sm); background: var(--surface); box-shadow: var(--shadow-card); margin: 0; }
 .outcome-list b { display: block; font: 650 30px/1.1 var(--font-display); letter-spacing: -0.03em; color: var(--ink); margin-bottom: var(--space-1); font-variant-numeric: tabular-nums; }

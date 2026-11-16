@@ -3,31 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Better Health, doctor-first prescriptions by voice · Tanvir Hossain</title>
-  <meta name="description" content="Case study: a voice-enabled prescription and telemedicine platform for Bangladesh. Product and platform ownership, CDC analytics, reactive services, K3s.">
+  <title>Better Health, a patient-first health platform · Tanvir Hossain</title>
+  <meta name="description" content="Case study: a patient-first health platform for Bangladesh, from e-prescriptions to telemedicine to a patient health record. Engineering leadership, CDC analytics, reactive services, K3s.">
   <link rel="canonical" href="https://tanvir.eliooo.org/work/better-health">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Doctor-first prescriptions, by voice · Tanvir Hossain">
-  <meta property="og:description" content="Prescription and telemedicine live. CDC analytics across five database clusters. Five boards, about 20 engineers.">
+  <meta property="og:title" content="A patient-first health platform · Tanvir Hossain">
+  <meta property="og:description" content="Prescriptions and telemedicine live, the patient health record next. CDC analytics across five database clusters. 25 engineers across four streams.">
   <meta property="og:image" content="https://tanvir.eliooo.org/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Source+Sans+3:wght@400;600&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Source+Sans+3:wght@400;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Source+Sans+3:wght@400;600&display=swap"></noscript>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="nav">
-    <div class="wrap nav-row">
-      <a class="name" href="../">Tanvir Hossain</a>
+  <header class="tp-nav">
+    <div class="wrap tp-nav__row">
+      <a class="tp-nav__name" href="../">Tanvir Hossain</a>
       <nav aria-label="Sections">
-        <ul class="nav-links" id="nav-links" style="display:flex">
+        <button type="button" class="tp-nav__menu" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <ul class="tp-nav__links" id="nav-links">
+          <li><a href="../#products">Products</a></li>
           <li><a href="../#work">Work</a></li>
-          <li><a href="../resume.pdf">Résumé</a></li>
+          <li><a href="../#about">About</a></li>
           <li><a href="../#contact">Contact</a></li>
         </ul>
       </nav>
@@ -40,8 +42,8 @@
         <a class="back" href="../">← All work</a>
         <p class="eyebrow">Case study</p>
         <h1>A prescription tool doctors actually finish</h1>
-        <p class="lede">Better Health is Celloscope's own product: a doctor-first, voice-enabled prescription and telemedicine platform for Bangladesh. I own product and platform delivery.</p>
-        <p class="cs-meta"><span><b>Company</b> Celloscope Ltd</span><span><b>Period</b> Oct 2025 to present</span><span><b>Role</b> Senior Software Engineer, product and platform owner</span><span><b>Team</b> about 20 engineers, five boards</span></p>
+        <p class="lede">Better Health is Celloscope's own product: a patient-first health platform for Bangladesh, built as e-prescriptions for doctors first, then telemedicine, and now the patient's lifelong health record. I lead product and platform delivery.</p>
+        <p class="cs-meta"><span><b>Company</b> Celloscope Ltd</span><span><b>Period</b> Oct 2025 to present</span><span><b>Role</b> Engineering Lead, product and platform</span><span><b>Team</b> 25 engineers, four streams</span></p>
       </div>
     </div>
 
@@ -99,17 +101,18 @@
 
         <div class="cs-foot">
           <a href="agrani-internet-banking">Next: internet banking for a state-owned bank →</a>
-          <a class="btn btn-primary" href="../resume.pdf">Download résumé</a>
+          <a class="tp-btn tp-btn--fill" href="../resume.pdf">Download résumé</a>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-row">
+  <footer class="tp-footer">
+    <div class="wrap tp-footer__row">
       <span>Tanvir Hossain · Dhaka · 2026</span>
-      <a href="https://github.com/KhondokerTanvirHossain/tanvir-web" rel="noopener">Source</a>
+      <span><a href="https://github.com/KhondokerTanvirHossain" rel="noopener">GitHub</a> · <a href="https://eliooo.org">elioo</a></span>
     </div>
   </footer>
+  <script type="module" src="../main.js"></script>
 </body>
 </html>

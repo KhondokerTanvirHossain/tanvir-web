@@ -88,7 +88,7 @@ test('home: client cards link case studies, contact is complete', () => {
   assert.match(home, /github\.com\/KhondokerTanvirHossain/);
   assert.match(sec('about'), /href="https:\/\/eliooo\.org"/);
 });
-test('home does not say doctor-first', () => assert.doesNotMatch(home, /doctor-first/i));
+test('no page says doctor-first', () => { for (const p of PAGES) assert.doesNotMatch(read(p), /doctor-first/i, p); });
 
 for (const w of WORK) {
   test(`${w}: case study structure`, () => {
@@ -140,4 +140,19 @@ test('design tokens: every text pair named for contrast meets AA', () => {
     ['bolo-ink', 'bolo-sky-high', 4.5], ['bolo-ink', 'bolo-sky-mid', 4.5], ['bolo-link', 'bolo-sky-high', 4.5], ['medioo-ink', 'medioo-ground', 4.5], ['medioo-link', 'medioo-ground', 4.5],
     ['finioo-ink', 'finioo-ground', 4.5], ['finioo-ink-2', 'finioo-ground', 4.5], ['intellidrugs-ink', 'intellidrugs-ground', 4.5], ['intellidrugs-link', 'intellidrugs-ground', 4.5]])
     assert.ok(contrast(v[fg], v[bg]) >= min, `${fg} on ${bg}: ${contrast(v[fg], v[bg]).toFixed(2)}`);
+});
+
+test('Better Health case study: patient-first, 25 engineers, Engineering Lead', () => {
+  const bh = read('work/better-health.html');
+  assert.match(bh, /patient-first/); assert.match(bh, /25 engineers/); assert.match(bh, /Engineering Lead/); assert.doesNotMatch(bh, /about 20 engineers/);
+});
+
+test('résumé: Engineering Lead now, real titles before', () => {
+  const r = read('resume.html');
+  assert.match(r, /class="contact-line">Engineering Lead/); assert.match(r, /Better Health, Engineering Lead/); assert.match(r, /Senior Software Engineer/); assert.match(r, /25 engineers/);
+  assert.ok(exists('Tanvir_Hossain_Engineering_Lead.pdf')); assert.ok(!exists('Tanvir_Hossain_Senior_Software_Engineer.pdf'));
+});
+
+test('case studies use the new chrome', () => {
+  for (const w of WORK) { const h = read(w); assert.match(h, /class="tp-nav/); assert.match(h, /type="module" src="\.\.\/main\.js"/); }
 });

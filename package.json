@@ -8,6 +8,6 @@
     "lint": "npx --yes html-validate@8 index.html work/*.html resume.html",
     "check": "npm run lint && npm test",
     "serve": "python3 -m http.server 4180",
-    "pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=resume.pdf --virtual-time-budget=4000 http://localhost:4180/resume.html && cp resume.pdf Tanvir_Hossain_Senior_Software_Engineer.pdf"
+    "pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=resume.pdf --virtual-time-budget=4000 http://localhost:4180/resume.html && cp resume.pdf Tanvir_Hossain_Engineering_Lead.pdf"
   }
 }
