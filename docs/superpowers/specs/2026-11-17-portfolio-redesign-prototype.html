@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tanvir Hossain · Engineering Lead</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Anek+Bangla:wght@500;650;750&family=Noto+Sans:wght@500;700&family=Noto+Sans+Bengali:wght@500;700&family=Instrument+Sans:wdth,wght@75..100,500..700&family=Onest:wght@500;600&display=swap">
+<style>
+:root{--stage:#000;--surface:#161617;--hairline:#2c2c2e;--line-control:#6e6e73;--ink:#f5f5f7;--ink-2:#a1a1a6;--ink-3:#86868b;--link:#2997ff;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui,sans-serif;--font-text:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+  --font-bolo:"Anek Bangla","Noto Sans Bengali",system-ui,sans-serif;--font-medioo:"Noto Sans","Noto Sans Bengali",system-ui,sans-serif;--font-finioo:"Instrument Sans",system-ui,sans-serif;--font-id:"Onest",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stage);color:var(--ink);font:400 17px/1.5 var(--font-text);letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ul{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:40px}
+
+/* Nav: hidden over the hero, slides in after */
+.nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;background:rgba(22,22,23,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);transform:translateY(-100%);transition:transform 320ms cubic-bezier(.2,0,0,1)}
+.nav.is-in{transform:none}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;font:600 15px/1 var(--font-text)}
+.nav a{text-decoration:none}
+.nav ul{display:flex;gap:28px;list-style:none;padding:0}
+.nav ul a{color:var(--ink-2);font-weight:500}
+.nav ul a:hover{color:var(--ink)}
+
+/* Shared type */
+.eyebrow{font:600 18px/1.3 var(--font-text);color:var(--ink-3);margin-bottom:16px}
+.sec-title{font:650 56px/1.04 var(--font-display);letter-spacing:-.035em;text-wrap:balance;max-width:18ch}
+.lede{font:400 22px/1.45 var(--font-text);letter-spacing:-.012em;color:var(--ink-2);margin-top:24px;max-width:40ch}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:99px;background:var(--ink);color:#000;font:600 17px/1 var(--font-text);text-decoration:none;transition:transform 100ms ease-out}
+.btn:active{transform:scale(.97)}
+.btn--outline{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-control)}
+.lnk{color:var(--link);font-weight:500;text-decoration:none}
+.lnk:hover{text-decoration:underline;text-underline-offset:3px}
+.actions{display:flex;gap:16px 24px;align-items:center;margin-top:36px;flex-wrap:wrap}
+.section{padding-block:120px}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.hero-l{display:flex;flex-direction:column;justify-content:space-between;gap:48px;padding:clamp(40px,6vw,96px) clamp(24px,5vw,88px) clamp(32px,4vw,56px);background:#0c0c0d}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border-radius:99px;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.08);font:500 15px/1 var(--font-text)}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:#30d158}
+.hero h1{font:600 clamp(44px,4.6vw,72px)/1.04 var(--font-display);letter-spacing:-.04em;text-wrap:balance;max-width:14ch}
+.foot{font:500 14px/1.6 var(--font-text);color:var(--ink-3)}
+.foot a{color:var(--ink-2)}
+.hero-r{position:relative;overflow:hidden;background:#8a8a8a}
+.hero-r img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 18%;filter:grayscale(1)}
+
+/* Products intro */
+.intro{padding-block:140px 72px}
+
+/* Pinned product show */
+.show-outer{position:relative;height:800vh}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden;contain:paint}
+.world{position:absolute;inset:0;opacity:0}
+.grid{position:absolute;inset:0;max-width:1280px;margin:0 auto;padding:84px 40px 104px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
+.texts{position:relative;height:400px}
+.tx{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
+.slot{aspect-ratio:16/10;width:100%}
+.film{position:absolute;overflow:hidden;transform-origin:50% 50%;box-shadow:0 30px 80px -20px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);backface-visibility:hidden}
+.film .poster{opacity:0}
+.over{position:absolute;left:0;right:0;bottom:12%;text-align:center;padding:0 40px;opacity:0;pointer-events:none;color:#fff8ef;font-family:var(--font-bolo);z-index:3}
+.over h3{font:750 clamp(44px,6vw,84px)/1.02 var(--font-bolo);letter-spacing:-.02em;max-width:15ch;margin:14px auto 0}
+.num{font:600 16px/1.3 var(--font-text);opacity:.8}
+.ttl{font-size:clamp(34px,3.8vw,54px);line-height:1.04;text-wrap:balance;margin-top:12px}
+.ld{font-size:19px;line-height:1.45;opacity:.86;margin-top:18px;max-width:36ch}
+.cta{display:inline-block;margin-top:24px;font-weight:600;font-size:19px;text-decoration:none}
+.cta:hover{text-decoration:underline;text-underline-offset:3px}
+.meta{font:500 14px/1.4 var(--font-text);opacity:.82;margin-top:18px}
+.meta i{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px}
+.meta i.soon{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.hint{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);font:600 15px/1 var(--font-text);color:var(--ink-3);z-index:3}
+.rail{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;gap:6px;padding:6px;border-radius:99px;background:rgba(22,22,23,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 0 0 1px rgba(255,255,255,.1);opacity:0;z-index:3}
+.rail button{position:relative;overflow:hidden;border:0;border-radius:99px;padding:9px 16px;background:transparent;color:var(--ink-2);font:600 14px/1 var(--font-text);cursor:pointer}
+.rail button span{position:relative;z-index:1}
+.rail button .fill{position:absolute;inset:0;background:rgba(255,255,255,.16);transform-origin:left;transform:scaleX(0)}
+.rail button.on{color:var(--ink)}
+
+/* Posters, drawn at frame size */
+.poster{position:absolute;inset:0;overflow:hidden}
+.p-bolo{background:linear-gradient(#2b1b4e,#5b3f8c 58%,#c98aa3)}
+.p-bolo .sun{position:absolute;width:22%;aspect-ratio:1;border-radius:50%;background:#f4b942;left:39%;bottom:20%;box-shadow:0 0 60px 20px rgba(244,185,66,.35)}
+.p-bolo .far{position:absolute;left:30%;right:-20%;bottom:-6%;height:34%;border-radius:50%;background:#5b3f8c}
+.p-bolo .near{position:absolute;left:-15%;right:-15%;bottom:-26%;height:44%;border-radius:50%;background:#1a0f2e}
+.st{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff8ef;opacity:.8}
+.p-medioo{background:linear-gradient(160deg,#15232d,#0b151c)}
+.p-medioo .ph{position:absolute;left:50%;top:9%;transform:translateX(-50%);width:36%;height:100%;border-radius:28px;background:#0e1a22;box-shadow:0 0 0 6px #0a1319,0 0 0 7px #2b3b46;padding:20px 14px;display:flex;flex-direction:column;gap:9px}
+.p-medioo .h{font:700 16px/1 var(--font-medioo);color:#e9eef0}
+.oo{color:#2ee0a5}.md{color:#ff9b92}
+.p-medioo .paper{border:1px solid #243642;border-radius:6px;padding:8px 10px;font:11.5px/1.5 ui-monospace,Menlo,monospace;color:#a3b2b5}
+.p-medioo .card{background:#15232d;border-radius:4px 14px 14px 14px;box-shadow:0 0 0 1px #2b3b46;padding:10px 12px;color:#e9eef0;font:500 12.5px/1.6 var(--font-medioo)}
+.chip{display:inline-block;margin-top:5px;padding:3px 9px;border-radius:99px;background:#3a2b12;color:#f4c06a;font:600 11.5px/1.4 var(--font-medioo)}
+.p-finioo{background:#0f1010;display:grid;grid-template-columns:1.2fr 1fr;gap:16px;padding:7%;align-items:center}
+.fc{background:#1f1f21;border-radius:14px;padding:22px;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.fl{font:500 13px/1 var(--font-text);color:#a1a1a6;margin-bottom:10px}
+.ff{font:650 clamp(48px,5.4vw,96px)/.9 var(--font-finioo);font-stretch:80%;letter-spacing:-.02em;color:#f5f5f7}
+.ff small{font:500 17px/1 var(--font-text);color:#a1a1a6;margin-left:6px}
+.fr{display:flex;justify-content:space-between;font:500 14px/1 var(--font-text);color:#a1a1a6;padding:12px 0;border-top:.5px solid rgba(255,255,255,.1)}
+.fr b{font:650 20px/1 var(--font-finioo);font-stretch:85%;color:#f5f5f7}
+.fa{display:inline-flex;margin-top:14px;padding:9px 16px;border-radius:8px;background:#f08223;color:#1c1107;font:600 14px/1 var(--font-text)}
+.p-id{background:#0b0d10;padding:6%;display:flex;flex-direction:column;gap:11px}
+.idb{display:flex;justify-content:space-between;align-items:center;font:600 18px/1 var(--font-id);letter-spacing:-.04em;color:#eceef2}
+.idb small{font:500 13px var(--font-id);letter-spacing:0;color:#b9bfc8}
+.dot{color:#8ab2f5}
+.idr{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#16191e;box-shadow:inset 0 0 0 1px #3a414b;color:#eceef2;font:500 14px/1.3 var(--font-id)}
+.idr b{flex:1;font-weight:600;font-size:14.5px}
+.sev{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:2px;font:600 12px/1 var(--font-id);white-space:nowrap}
+.maj{background:#3a1714;color:#ff9488;border:1px solid #6b2a24}.mod{background:#30220a;color:#f0ba5c;border:1px solid #5c4314}
+.nod{color:#eceef2;border:1px solid #747c89;background:#1b1e23 repeating-linear-gradient(135deg,#2a2f36 0 2px,transparent 2px 7px)}
+.rv{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:99px;font:600 12px/1 var(--font-id);color:#b9bfc8;border:1px solid #747c89;white-space:nowrap}
+.ok{background:#0f291c;color:#6fd09e;border-color:#1e5137}
+
+/* Client work */
+.tp-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:64px;padding-block:32px;border-block:1px solid var(--hairline)}
+.tp-stats b{display:block;font:650 56px/1 var(--font-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.tp-stats span{display:block;margin-top:8px;font:500 14px/1.4 var(--font-text);color:var(--ink-3)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:48px}
+.card{display:flex;flex-direction:column;gap:12px;padding:32px;border-radius:24px;background:var(--surface);box-shadow:0 0 0 1px rgba(255,255,255,.06);text-decoration:none;transition:transform 160ms ease-out;min-width:0}
+.card:hover{transform:translateY(-2px)}
+.card .m{font:500 14px/1.4 var(--font-text);color:var(--ink-3)}
+.card h3{font:650 28px/1.12 var(--font-display);letter-spacing:-.025em;text-wrap:balance}
+.card .n{font:650 40px/1 var(--font-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:16px}
+.card .n small{display:block;margin-top:8px;font:500 15px/1.4 var(--font-text);letter-spacing:0;color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tags span{font:500 13px/1 var(--font-text);color:var(--ink-2);padding:7px 11px;border-radius:12px;box-shadow:inset 0 0 0 1px var(--hairline)}
+.more{margin-top:auto;padding-top:16px;color:var(--link);font:500 15px/1.3 var(--font-text)}
+
+/* How I lead */
+.lead-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 64px;margin-top:56px}
+.lead-grid h3{font:650 24px/1.2 var(--font-display);letter-spacing:-.02em;margin-bottom:12px}
+.lead-grid p{color:var(--ink-2);max-width:46ch}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.about .body{color:var(--ink-2);max-width:52ch;margin-top:24px;font-size:19px;line-height:1.55}
+.timeline{list-style:none;padding:0;border-top:1px solid var(--hairline)}
+.timeline li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:24px;padding-block:18px;border-bottom:1px solid var(--hairline);font-size:16px}
+.timeline .when{color:var(--ink-3);font-weight:500;font-variant-numeric:tabular-nums}
+.timeline .what span{color:var(--ink-2)}
+
+/* Contact */
+.contact{text-align:center;padding-block:160px 120px}
+.contact .sec-title{margin:0 auto;max-width:16ch;font-size:72px;letter-spacing:-.04em}
+.contact .lede{margin-inline:auto}
+.contact .actions{justify-content:center}
+.contact .note{margin:48px auto 0;max-width:52ch;font-size:15px;color:var(--ink-3)}
+.footer{border-top:1px solid var(--hairline);padding-block:24px;font:500 14px/1.4 var(--font-text);color:var(--ink-3)}
+.footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer a{color:var(--ink-3)}
+
+/* Overview bento */
+.overview{padding-block:120px 40px}
+.bento{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);grid-template-rows:auto auto;gap:20px}
+.bx{background:var(--surface);border-radius:24px;padding:32px;box-shadow:0 0 0 1px rgba(255,255,255,.06);min-width:0;overflow:hidden}
+.bx-intro{grid-row:span 2;display:flex;flex-direction:column;gap:20px}
+.bx-intro h2{font:600 30px/1.18 var(--font-display);letter-spacing:-.025em;color:var(--ink)}
+.bx-intro p{color:var(--ink-2);font-size:16px}
+.bx-intro .btn{align-self:flex-start;min-height:46px;padding:0 22px;font-size:16px}
+.clock{margin-top:auto}
+.clock .d{font:500 17px/1.3 var(--font-text);color:var(--ink-3)}
+.clock .t{font:600 40px/1.1 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.clock .o{font:500 14px/1.4 var(--font-text);color:var(--ink-3);margin-top:8px}
+.bx-quote{grid-row:span 2;display:flex;flex-direction:column;padding:56px 56px 40px}
+.quotes{position:relative;flex:1;min-height:300px}
+.q{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;opacity:0;transform:translateY(8px);transition:opacity 500ms cubic-bezier(.2,0,0,1),transform 500ms cubic-bezier(.2,0,0,1);pointer-events:none}
+.q.on{opacity:1;transform:none;pointer-events:auto}
+.q blockquote{margin:0;font:500 clamp(24px,2.3vw,34px)/1.28 var(--font-display);letter-spacing:-.02em;text-wrap:pretty}
+.q .who b{display:block;font:600 18px/1.3 var(--font-text)}
+.q .who > span{display:block;margin-top:4px;color:var(--ink-3);font-size:15px}
+.example{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line-control);font:600 12px/1.2 var(--font-text);color:var(--ink-2);vertical-align:2px}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-top:32px}
+.dots{display:flex;gap:8px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line-control);cursor:pointer}
+.dots button.on{background:var(--ink)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--ink-2);font:500 22px/1 var(--font-text);cursor:pointer}
+.arrows button:hover{background:rgba(255,255,255,.08);color:var(--ink)}
+.bx h3{font:600 21px/1.25 var(--font-display);letter-spacing:-.015em}
+.bx .sub{color:var(--ink-2);font-size:15px;margin-top:8px}
+.ticker{margin:24px -32px 0;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker-in{display:flex;gap:10px;width:max-content;animation:tick 28s linear infinite}
+.ticker span{display:inline-flex;align-items:center;height:48px;padding:0 16px;border-radius:12px;background:#000;box-shadow:inset 0 0 0 1px var(--hairline);font:600 14px/1 var(--font-text);color:var(--ink);white-space:nowrap}
+@keyframes tick{to{transform:translateX(-50%)}}
+.burn{display:block;width:100%;height:84px;margin-top:20px}
+.burn .grid-l{stroke:var(--hairline);stroke-width:1}
+.burn .ideal{stroke:var(--line-control);stroke-width:1.5;stroke-dasharray:4 5;fill:none}
+.burn .real{stroke:var(--ink);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 1600ms cubic-bezier(.2,0,0,1)}
+.burn.in .real{stroke-dashoffset:0}
+.burn .end{fill:var(--ink)}
+.burn text{fill:var(--ink-3);font:500 11px var(--font-text)}
+.marquee{margin-top:72px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee-in{display:flex;gap:88px;width:max-content;animation:tick 40s linear infinite;padding-block:8px}
+.marquee span{font:650 30px/1 var(--font-display);letter-spacing:-.03em;color:#5a5a5e;white-space:nowrap}
+.marquee span.serif{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:-.01em}
+@media (prefers-reduced-motion:reduce){.ticker-in,.marquee-in{animation:none}.burn .real{transition:none;stroke-dashoffset:0}.q{transition:none}}
+
+/* Phones */
+@media (max-width:820px){
+  .wrap{padding-inline:20px}
+  .nav ul{display:none}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-r{height:72vh}
+  .hero-l{padding:32px 20px 40px}
+  .sec-title{font-size:36px}.lede{font-size:18px}
+  .grid{grid-template-columns:1fr;padding:72px 20px 88px;gap:24px;align-content:center}
+  .texts{height:300px}.ttl{font-size:30px}.ld{font-size:16px}
+  .tp-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.tp-stats b{font-size:40px}
+  .cards,.lead-grid,.about,.bento{grid-template-columns:1fr}
+  .bx-intro,.bx-quote{grid-row:auto}.bx-quote{padding:32px}.quotes{min-height:340px}
+  .card{padding:24px}
+  .contact .sec-title{font-size:44px}
+  .timeline li{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion:reduce){.nav{transition:none}.btn,.card{transition:none}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav"><div class="wrap">
+  <a href="#top">Tanvir Hossain</a>
+  <ul><li><a href="#products">Products</a></li><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+</div></header>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="hero-l">
+    <span class="pill">Open to remote Engineering Lead roles</span>
+    <div>
+      <p class="eyebrow">Tanvir Hossain · Engineering Lead · Dhaka, UTC+6</p>
+      <h1>I lead the team. And ship the whole product.</h1>
+      <p class="lede">I lead 25 engineers across four streams on a patient-first health platform. Before that, internet banking for 583,000 customers and a platform for a national regulator. On the side, four products of my own.</p>
+      <div class="actions"><a class="btn" href="#resume">Download résumé</a><a class="lnk" href="#contact">Email me ›</a></div>
+    </div>
+    <p class="foot">Find me on <a href="#gh">GitHub</a> and <a href="#li">LinkedIn</a>.<br>Résumé as <a href="#resume">PDF</a>.</p>
+  </div>
+  <div class="hero-r"><img src="../../../assets/src/portrait-studio.png" alt="Tanvir Hossain in a dark suit, smiling, against a grey studio wall"></div>
+</section>
+
+<section class="wrap overview" aria-label="Overview">
+  <div class="bento">
+    <div class="bx bx-intro">
+      <h2>Engineering Lead who takes products from first idea to production.</h2>
+      <p>Hiring for a team that needs someone to own the outcome? Get in touch and tell me what you're building.</p>
+      <a class="btn" href="#contact">Say hello</a>
+      <div class="clock" aria-live="off"><p class="d" id="clkD">Dhaka</p><p class="t" id="clkT">--:--:--</p><p class="o" id="clkO">UTC+6 · overlaps 8am to 12pm US Eastern</p></div>
+    </div>
+    <div class="bx bx-quote">
+      <div class="quotes" id="quotes">
+        <figure class="q on" style="margin:0"><blockquote>“As a team lead, he demonstrates exceptional leadership - blending deep technical expertise with a collaborative and supportive approach that brings out the best in everyone on the team.”</blockquote><figcaption class="who"><b>Heronmoy Emon</b><span>Backend Software Engineer · worked with Tanvir on the same team</span></figcaption></figure>
+        <figure class="q" style="margin:0"><blockquote>“He has master level grips over Spring Boot, System Architecture, Cloud Native. … He is a super genius in problem solving, team management, task management, hiring and mentoring.”</blockquote><figcaption class="who"><b>Asiya Khatun Papiya</b><span>Human Resource Administrator (Technical Recruiter) · managed Tanvir directly</span></figcaption></figure>
+      </div>
+      <div class="qnav"><div class="dots" id="qdots"></div><div class="arrows"><button type="button" id="qprev" aria-label="Previous quote">‹</button><button type="button" id="qnext" aria-label="Next quote">›</button></div></div>
+    </div>
+    <div class="bx">
+      <h3>Backend and platform</h3>
+      <p class="sub">Reactive Java services, event pipelines and the cloud they run on.</p>
+      <div class="ticker" aria-label="Java 21, Spring Boot, WebFlux, Kafka, PostgreSQL, Redis, Kubernetes, AWS, Terraform, Vault, Keycloak, Angular"><div class="ticker-in"><span>Java 21</span><span>Spring Boot</span><span>WebFlux</span><span>Kafka</span><span>PostgreSQL</span><span>Redis</span><span>Kubernetes</span><span>AWS</span><span>Terraform</span><span>Vault</span><span>Keycloak</span><span>Angular</span><span aria-hidden="true">Java 21</span><span aria-hidden="true">Spring Boot</span><span aria-hidden="true">WebFlux</span><span aria-hidden="true">Kafka</span><span aria-hidden="true">PostgreSQL</span><span aria-hidden="true">Redis</span><span aria-hidden="true">Kubernetes</span><span aria-hidden="true">AWS</span><span aria-hidden="true">Terraform</span><span aria-hidden="true">Vault</span><span aria-hidden="true">Keycloak</span><span aria-hidden="true">Angular</span></div></div>
+    </div>
+    <div class="bx">
+      <h3>Product and delivery</h3>
+      <p class="sub">PRDs, two-week sprints and the client conversation.</p>
+      <svg class="burn" id="burn" viewBox="0 0 260 84" role="img" aria-label="A sprint burndown that lands on zero by the last day">
+        <line class="grid-l" x1="0" y1="72" x2="260" y2="72"/><line class="grid-l" x1="0" y1="8" x2="260" y2="8"/>
+        <path class="ideal" d="M4 10 L252 70"/>
+        <path class="real" d="M4 10 L30 14 L56 14 L82 26 L108 30 L134 38 L160 44 L186 52 L212 60 L238 66 L252 70"/>
+        <circle class="end" cx="252" cy="70" r="4"/>
+        <text x="4" y="83">Day 1</text><text x="214" y="83">Day 10</text>
+      </svg>
+    </div>
+  </div>
+  <div class="marquee" aria-label="Clients and teams: Agrani Bank PLC, Microcredit Regulatory Authority, Primefocus Health, Better Health, Celloscope, CoKreates"><div class="marquee-in"><span>Agrani Bank PLC</span><span class="serif">Microcredit Regulatory Authority</span><span>Primefocus Health</span><span>Better Health</span><span class="serif">Celloscope</span><span>CoKreates</span><span aria-hidden="true">Agrani Bank PLC</span><span class="serif" aria-hidden="true">Microcredit Regulatory Authority</span><span aria-hidden="true">Primefocus Health</span><span aria-hidden="true">Better Health</span><span class="serif" aria-hidden="true">Celloscope</span><span aria-hidden="true">CoKreates</span></div></div>
+</section>
+
+<section class="wrap intro" id="products">
+  <p class="eyebrow">Products</p>
+  <h2 class="sec-title">Four products I designed, built and run myself.</h2>
+  <p class="lede">Each one solves one worry for people in Bangladesh. Product, design, backend, AI and infrastructure, end to end.</p>
+</section>
+
+<div class="show-outer" id="outer"><div class="pin" id="show">
+  <div id="worlds"></div>
+  <div class="grid" id="grid"><div class="texts" id="texts"></div><div class="slot" id="slot"></div></div>
+  <div class="film" id="film"></div>
+  <div class="over" id="over"><p class="num">01 · Bolo</p><h3>Speak English without freezing.</h3></div>
+  <p class="hint" id="hint">Scroll</p>
+  <div class="rail" id="rail"></div>
+</div></div>
+
+<section class="section" id="work"><div class="wrap">
+  <p class="eyebrow">Client work</p>
+  <h2 class="sec-title">Systems where the stakes were real.</h2>
+  <p class="lede">Banks, a national regulator and US healthcare. I led the teams, owned the architecture and stood in front of the client.</p>
+  <div class="tp-stats">
+    <div><b>25</b><span>engineers led across four streams</span></div>
+    <div><b>583K+</b><span>internet banking customers</span></div>
+    <div><b>$1.8B</b><span>transaction value processed</span></div>
+    <div><b>99.99%</b><span>uptime for a national regulator</span></div>
+  </div>
+  <div class="cards">
+    <a class="card" href="#better-health"><span class="m">Better Health · 2025 to now · Product and platform lead</span><h3>A patient-first health platform</h3><span class="n">25<small>engineers across four streams, two-week sprints</small></span><span class="tags"><span>WebFlux</span><span>Kafka CDC</span><span>K3s</span></span><span class="more">Read the case study ›</span></a>
+    <a class="card" href="#primefocus"><span class="m">Primefocus Health · 2024 to 2025 · Engineering manager and architect</span><h3>HIPAA remote patient monitoring on AWS</h3><span class="n">100%<small>HIPAA scan pass. MVP on time, funding secured</small></span><span class="tags"><span>EKS</span><span>Terraform</span><span>Flutter</span></span><span class="more">Read the case study ›</span></a>
+    <a class="card" href="#mra"><span class="m">Microcredit Regulatory Authority · 2023 to 2024 · Team Lead</span><h3>A multi-tenant platform for a national regulator</h3><span class="n">600K+<small>transactions a week at 99.99% uptime</small></span><span class="tags"><span>Reactive Java</span><span>Multi-tenant</span><span>Batch</span></span><span class="more">Read the case study ›</span></a>
+    <a class="card" href="#agrani"><span class="m">Agrani Bank PLC · 2021 to 2023 · Team of 15, bank-facing engineer</span><h3>Internet banking for a state-owned bank</h3><span class="n">583K+<small>customers, $1.8B processed at 120+ TPS</small></span><span class="tags"><span>Spring Boot</span><span>PostgreSQL</span><span>Temenos T24</span></span><span class="more">Read the case study ›</span></a>
+  </div>
+</div></section>
+
+<section class="section" id="lead"><div class="wrap">
+  <p class="eyebrow">How I lead</p>
+  <h2 class="sec-title">Four habits, learned the expensive way.</h2>
+  <div class="lead-grid">
+    <div><h3>Ownership over scope</h3><p>If the bank's servers are down and the deployment is mine, I am at the bank. Titles describe the job; the gap between teams is also the job.</p></div>
+    <div><h3>A definition of done that means something</h3><p>On Better Health, done means a real doctor completes a prescription unassisted on production. Not merged, not deployed: used.</p></div>
+    <div><h3>Tests first, then code</h3><p>Payment flows and prescriptions do not get a second chance. The failing test comes first, and the suite stays fast enough that nobody skips it.</p></div>
+    <div><h3>Say the uncomfortable thing early</h3><p>A slipped date, a wrong assumption, a security gap. I report it the day I find it, with what I will do about it.</p></div>
+  </div>
+</div></section>
+
+<section class="section" id="about"><div class="wrap about">
+  <div>
+    <p class="eyebrow">About</p>
+    <h2 class="sec-title" style="font-size:48px">Engineer first. Then the person who makes it ship.</h2>
+    <p class="body">I started as a Java backend engineer and grew into owning architecture, infrastructure, delivery and the client conversation. I write the PRDs, run the sprints, and still read the Kafka Connect logs when I have to. Outside client work I run <a class="lnk" href="https://eliooo.org">elioo</a>, the studio where my four products live.</p>
+  </div>
+  <ul class="timeline">
+    <li><span class="when">Oct 2025 to now</span><span class="what"><b>Better Health, Celloscope.</b> <span>Product and platform lead, 25 engineers.</span></span></li>
+    <li><span class="when">Jul 2024 to Sep 2025</span><span class="what"><b>Primefocus Health.</b> <span>Engineering manager and architect, right hand to the VP of Engineering.</span></span></li>
+    <li><span class="when">May 2023 to Jun 2024</span><span class="what"><b>MRA-IMS.</b> <span>Team Lead, national microfinance platform.</span></span></li>
+    <li><span class="when">Sep 2021 to Apr 2023</span><span class="what"><b>Agrani Bank internet banking.</b> <span>Backend engineer, then the bank-facing engineer.</span></span></li>
+    <li><span class="when">2020 to 2021</span><span class="what"><b>CoKreates.</b> <span>Software Engineer on a government ERP.</span></span></li>
+    <li><span class="when">2015 to 2019</span><span class="what"><b>CUET.</b> <span>BSc in Computer Science and Engineering.</span></span></li>
+  </ul>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <p class="eyebrow">Contact</p>
+  <h2 class="sec-title">Hiring an engineering lead?</h2>
+  <p class="lede">I'm open to remote roles with US and Canadian product teams. One email away.</p>
+  <div class="actions"><a class="btn" href="#resume">Download résumé</a><a class="btn btn--outline" href="#li">LinkedIn</a><a class="lnk" href="#email">k.tanvir.hossain@gmail.com ›</a></div>
+  <p class="note">Dhaka is UTC+6. I keep 8am to 12pm US Eastern open for overlap, and I have worked daily with a US client's leadership.</p>
+</div></section>
+</main>
+
+<footer class="footer"><div class="wrap"><span>Tanvir Hossain · Dhaka · 2026</span><span><a href="#gh">GitHub</a> · <a href="https://eliooo.org">elioo</a></span></div></footer>
+
+<script>
+const P=[
+ {num:'01',name:'Bolo',t:'Speak English without freezing.',l:'A voice-first speaking buddy for Bangla speakers who know English on paper but freeze when they talk.',c:'Try Bolo ›',cc:'#ffd27a',ink:'#fff8ef',font:'var(--font-bolo)',w:750,bg:'linear-gradient(#2b1b4e,#5b3f8c 60%,#7a5590)',s:'Live',cls:'p-bolo'},
+ {num:'02',name:'Medi<span class="oo">oo</span><span class="md">.</span>',rail:'Medioo',t:"Your mother's medical papers, in plain Bangla.",l:'আম্মার রিপোর্টে কী লেখা আছে, সহজ বাংলায়। Code checks the numbers; the AI only puts them into words.',c:'Open Medioo ›',cc:'#5fc4d3',ink:'#e9eef0',font:'var(--font-medioo)',w:700,bg:'#0e1a22',s:'Live',cls:'p-medioo'},
+ {num:'03',name:'Finioo',t:'Your business model, in numbers you can trust.',l:"An AI co-pilot that builds and runs a founder's business model. Every figure shows where it came from.",c:'Visit Finioo ›',cc:'#f5f5f7',ink:'#f5f5f7',font:'var(--font-display)',w:650,bg:'#0f1010',s:'Launching soon',soon:1,cls:'p-finioo'},
+ {num:'04',name:'IntelliDrugs<span class="dot">.</span>',rail:'IntelliDrugs',t:"Bangladesh's drug data, checked by pharmacists.",l:"A drug and interaction database that is honest about what it doesn't know.",c:'Open IntelliDrugs ›',cc:'#8ab2f5',ink:'#eceef2',font:'var(--font-id)',w:600,bg:'#0b0d10',s:'Live',cls:'p-id'}];
+const POST={
+ 'p-bolo':'<span class="st" style="left:14%;top:12%"></span><span class="st" style="left:82%;top:18%"></span><span class="st" style="left:66%;top:8%"></span><span class="st" style="left:30%;top:22%"></span><div class="sun"></div><div class="far"></div><div class="near"></div>',
+ 'p-medioo':'<div class="ph"><div class="h">Medi<span class="oo">oo</span><span class="md">.</span> <span style="font:500 12px var(--font-medioo);color:#a3b2b5">আম্মা ▾</span></div><div class="paper">HbA1c &nbsp;8.4 % &nbsp;(4.0–5.6)<br>কাগজে লেখা · পৃষ্ঠা ১</div><div class="card">আম্মার ১২ অক্টোবরের ল্যাব রিপোর্ট: একটি মান রিপোর্টে লেখা সীমার বেশি।<br><span class="chip">▲ সীমার বেশি</span></div><div class="card">এ সপ্তাহের মধ্যে একজন ডাক্তার দেখান।</div></div>',
+ 'p-finioo':'<div class="fc"><p class="fl">Runway · Forecast</p><p class="ff">8.4<small>months</small></p></div><div class="fc"><div class="fr"><span>MRR</span><b>৳18.6L</b></div><div class="fr"><span>Churn</span><b>2.5%</b></div><div class="fr"><span>CAC payback</span><b>7 mo</b></div><span class="fa">Use 2.5%</span></div>',
+ 'p-id':'<div class="idb"><span>IntelliDrugs<span class="dot">.</span></span><small>138 of 412 reviewed</small></div><div class="idr"><b>Warfarin + Aspirin</b><span class="sev maj">▲ Major</span><span class="rv ok">Approved</span></div><div class="idr"><b>Metformin + Furosemide</b><span class="sev mod">◆ Moderate</span><span class="rv">Not yet reviewed</span></div><div class="idr"><b>Napa Extra + Tusca</b><span class="sev nod">No interaction data</span><span class="rv">Not yet reviewed</span></div>'};
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ss=x=>x*x*(3-2*x),lerp=(a,b,t)=>a+(b-a)*t;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const n=P.length,$=id=>document.getElementById(id);
+$('worlds').innerHTML=P.map(p=>`<div class="world" style="background:${p.bg}"></div>`).join('');
+$('texts').innerHTML=P.map(p=>`<div class="tx" style="color:${p.ink};font-family:${p.font}"><p class="num">${p.num} · ${p.name}</p><h3 class="ttl" style="font-family:${p.font};font-weight:${p.w};letter-spacing:${p.w>=700?'-.02em':'-.034em'}">${p.t}</h3><p class="ld">${p.l}</p><a class="cta" style="color:${p.cc}" href="#">${p.c}</a><p class="meta"><i class="${p.soon?'soon':''}"></i>${p.s} · Designed, built and run solo</p></div>`).join('');
+$('film').innerHTML=P.map(p=>`<div class="poster ${p.cls}">${POST[p.cls]}</div>`).join('');
+$('rail').innerHTML=P.map((p,i)=>`<button type="button" data-i="${i}"><i class="fill"></i><span>${p.rail||p.name}</span></button>`).join('');
+const worlds=[...document.querySelectorAll('.world')],txs=[...document.querySelectorAll('.tx')],posters=[...document.querySelectorAll('#film .poster')],rail=[...document.querySelectorAll('#rail button')];
+const outer=$('outer'),show=$('show'),film=$('film'),slot=$('slot'),over=$('over'),hint=$('hint'),railEl=$('rail'),nav=$('nav'),hero=$('hero');
+
+// Phases of the pinned show, as fractions of its scroll length
+const A=.08 /* small film grows to full screen */, B=.14 /* hold full screen */, C=.22 /* settle into the frame */;
+let L={}; // cached geometry: the film's box is the frame (slot), and every move is a transform of it
+function layout(){
+  const vw=show.clientWidth,vh=show.clientHeight,sr=slot.getBoundingClientRect(),hr=show.getBoundingClientRect();
+  const x=sr.left-hr.left,y=sr.top-hr.top,w=sr.width,h=sr.height;
+  Object.assign(film.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px'});
+  const cx=vw/2-(x+w/2),cy=vh/2-(y+h/2);
+  L={cx,cy,full:Math.max(vw/w,vh/h)*1.01,small:Math.min(.6*vw/w,1)};
+}
+function frame(){
+  const vh=innerHeight;
+  nav.classList.toggle('is-in',hero.getBoundingClientRect().bottom<60);
+  const r=outer.getBoundingClientRect(),span=outer.offsetHeight-vh,p=clamp(-r.top/span);
+  const e=reduce?1:ss(clamp(p/A));
+  const s=reduce?(p>B?1:0):ss(clamp((p-B)/(C-B)));
+  let sc,tx,ty,rad;
+  if(s<=0){sc=lerp(L.small,L.full,e);tx=L.cx;ty=L.cy;rad=lerp(28,0,e);}
+  else{sc=lerp(L.full,1,s);tx=lerp(L.cx,0,s);ty=lerp(L.cy,0,s);rad=lerp(0,28,s);}
+  film.style.transform=`translate3d(${tx}px,${ty}px,0) scale(${sc})`;
+  film.style.borderRadius=(rad/sc)+'px';
+  hint.style.opacity=1-clamp(p/(A*.5));
+  const oi=clamp((e-.85)/.15)*(1-clamp(s*2.5));
+  over.style.opacity=oi;over.style.transform=`translateY(${(1-clamp((e-.85)/.15))*24}px)`;
+  railEl.style.opacity=clamp((s-.6)/.4);railEl.style.pointerEvents=s>.6?'auto':'none';
+  // product crossfade: the incoming layer fades in ON TOP of the outgoing one, so nothing flashes or dips to black
+  const raw=clamp((p-C)/(1-C))*(n-1),i=Math.min(n-2,Math.floor(raw)),f=raw-i;
+  const g=reduce?Math.round(f):ss(clamp((f-.35)/.3));
+  const t=i+g;
+  P.forEach((_,k)=>{
+    const op=k===i?1:k===i+1?g:0;
+    worlds[k].style.opacity=k===0&&i===0?(1-g)*0+op*clamp(e*1.15):op;
+    posters[k].style.opacity=op;
+    posters[k].style.transform=k===i+1?`scale(${1.04-.04*g})`:'none';
+    const d=t-k;txs[k].style.opacity=clamp(1-Math.abs(d)*2.2)*(k===0?clamp((s-.5)/.5):1);txs[k].style.transform=`translateY(${-d*40}px)`;
+    txs[k].style.pointerEvents=Math.abs(d)<.3?'auto':'none';
+    rail[k].classList.toggle('on',Math.round(t)===k);rail[k].firstChild.style.transform=`scaleX(${clamp(1-Math.abs(d)*1.2)})`;
+  });
+  worlds[0].style.opacity=i===0?clamp(e*1.15):0;
+}
+rail.forEach(b=>b.onclick=()=>{const span=outer.offsetHeight-innerHeight,top=scrollY+outer.getBoundingClientRect().top,k=+b.dataset.i;scrollTo({top:top+span*(C+(1-C)*k/(n-1))+2,behavior:reduce?'auto':'smooth'})});
+let tk=false;
+addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{frame();tk=false})}},{passive:true});
+addEventListener('resize',()=>{layout();frame()});
+document.fonts?.ready.then(()=>{layout();frame()});
+layout();frame();
+
+// Live Dhaka clock
+const fD=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Dhaka',weekday:'long',day:'numeric',month:'long'}),fT=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Dhaka',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+function tickClock(){const d=new Date();$('clkD').textContent=fD.format(d)+' in Dhaka';$('clkT').textContent=fT.format(d)}
+tickClock();setInterval(tickClock,1000);
+
+// Quotes carousel: auto-advances, pauses on hover and focus, arrows and dots work
+const qs=[...document.querySelectorAll('.q')];let qi=0,qTimer;
+$('qdots').innerHTML=qs.map((_,i)=>`<button type="button" aria-label="Quote ${i+1}"></button>`).join('');
+const qd=[...$('qdots').children];
+function showQ(i){qi=(i+qs.length)%qs.length;qs.forEach((q,k)=>q.classList.toggle('on',k===qi));qd.forEach((b,k)=>b.classList.toggle('on',k===qi))}
+function startQ(){if(!reduce){clearInterval(qTimer);qTimer=setInterval(()=>showQ(qi+1),7000)}}
+qd.forEach((b,k)=>b.onclick=()=>{showQ(k);startQ()});$('qprev').onclick=()=>{showQ(qi-1);startQ()};$('qnext').onclick=()=>{showQ(qi+1);startQ()};
+const qBox=document.querySelector('.bx-quote');qBox.addEventListener('mouseenter',()=>clearInterval(qTimer));qBox.addEventListener('mouseleave',startQ);
+showQ(0);startQ();
+
+// Burndown draws itself once when it comes into view
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}}),{threshold:.5}).observe($('burn'));
+</script>
+</body>
+</html>
