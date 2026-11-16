@@ -182,3 +182,14 @@ test('deploy workflow: only the deploy job can write packages', () => {
   assert.doesNotMatch(top, /packages:\s*write/);
   assert.match(y.slice(y.indexOf('  deploy:')), /permissions:\s*\n\s*contents: read\s*\n\s*packages: write/);
 });
+
+test('home: only Inter loads up front; product fonts wait for the show; the portrait is fetched first', () => {
+  const head = home.slice(0, home.indexOf('</head>'));
+  assert.doesNotMatch(head, /rel="preload" href="https:\/\/fonts\.googleapis/);
+  const lazy = head.match(/<link id="product-fonts" rel="stylesheet" href="([^"]+)" media="print">/);
+  assert.ok(lazy, 'product fonts stylesheet with media="print"');
+  for (const f of ['Anek+Bangla', 'Noto+Sans+Bengali', 'Instrument+Sans', 'Onest']) assert.ok(lazy[1].includes(f), f);
+  assert.match(head, /<noscript><link rel="stylesheet" href="[^"]*Anek\+Bangla/);
+  for (const m of head.matchAll(/<link rel="stylesheet" href="(https:\/\/fonts\.googleapis[^"]+)" media="print" onload/g)) assert.doesNotMatch(m[1], /Anek|Onest|Instrument|Noto/);
+  assert.match(head, /<link rel="preload" as="image" href="assets\/portrait-1086\.webp"[^>]*fetchpriority="high"/);
+});

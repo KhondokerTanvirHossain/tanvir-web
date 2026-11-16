@@ -73,6 +73,14 @@ try {
     const navH = await ev(`document.querySelector('.tp-nav').getBoundingClientRect().height`);
     check(`${tag} nav is 52px inside the show`, Math.round(navH) === 52, `${navH}`);
 
+    // 3b. Product fonts are not fetched on the first screen, and are switched on before the show is reached.
+    await load();
+    const early = await ev(`({ media: document.getElementById('product-fonts').media, fetched: performance.getEntriesByType('resource').some((e) => /fonts\\.gstatic\\.com\\/s\\/(anekbangla|onest|instrumentsans|notosansbengali)\\//i.test(e.name)) })`);
+    check(`${tag} product fonts wait at first paint`, early.media === 'print' && !early.fetched, JSON.stringify(early));
+    await scrollShow(0);
+    const later = await ev(`document.getElementById('product-fonts').media`);
+    check(`${tag} product fonts on by the show`, later === 'all', later);
+
     // 4. Keyboard: Tab from the client strip reaches each product's link in order, on screen in a fully shown chapter,
     //    and a click at that spot lands on that link (hidden chapters must not swallow it).
     await ev(`document.querySelector('.tp-marquee').focus()`);

@@ -36,7 +36,7 @@ healthy() {
 
 current=$(cat "$DIR/TAG" 2>/dev/null || true)
 log "pulling $REPO:$IMAGE_TAG"
-pull "$REPO:$IMAGE_TAG"
+docker image inspect "$REPO:$IMAGE_TAG" >/dev/null 2>&1 || pull "$REPO:$IMAGE_TAG"
 up "$IMAGE_TAG"
 
 if healthy; then

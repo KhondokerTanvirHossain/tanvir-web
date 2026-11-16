@@ -140,7 +140,21 @@ export function initShow(root) {
   frame();
 }
 
+/** Switches on the product fonts (loaded as media="print") before the reader reaches the show. */
+export function lazyProductFonts(doc, root) {
+  const link = doc.getElementById('product-fonts');
+  if (!link || link.media === 'all') return;
+  const on = () => { link.media = 'all'; };
+  const win = doc.defaultView;
+  if (!root || !('IntersectionObserver' in win)) { on(); return; }
+  const io = new win.IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { on(); io.disconnect(); }
+  }, { rootMargin: '800px 0px' });
+  io.observe(root);
+}
+
 if (typeof document !== 'undefined') {
   const root = document.querySelector('.tp-show');
+  lazyProductFonts(document, root);
   if (root) initShow(root);
 }
