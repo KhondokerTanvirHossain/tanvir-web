@@ -172,7 +172,7 @@
   .tp-chapter__title { font-size: 30px; }
   .tp-chapter__lede { font-size: 16px; }
   .tp-film { border-radius: 20px; }
-  .ph__card { font-size: 10px; } .ph__paper { font-size: 9.5px; } .ph { padding: 12px 9px; gap: 6px; }
+  .ph { width: 58%; padding: 12px 10px; gap: 6px; } .ph__card, .ph__paper { font-size: 11px; } .ph__card + .ph__card { display: none; }
   .tp-poster--finioo { padding: 5%; gap: 8px; } .fc { padding: 12px; } .fc__row { padding: 7px 0; font-size: 12px; } .fc__row b { font-size: 15px; } .fc__apply { display: none; }
   .id__row { padding: 7px 9px; gap: 6px; font-size: 12px; } .id__row b { font-size: 12px; } .id__row .rv { display: none; } .tp-poster--intellidrugs { gap: 6px; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }

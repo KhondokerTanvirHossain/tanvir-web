@@ -362,6 +362,42 @@
         ],
         "createdAt": "2026-11-16T20:15:45.287Z",
         "reason": "Claude: chapters and film frames clip decorative scene shapes (sun, hills, phone mock) on purpose; no tooltips or menus inside"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T20:33:03.308Z",
+        "reason": "Claude: About timeline rows use hairline dividers with 18px padding-block; dividers, not boxed containers"
+      },
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T20:33:03.338Z",
+        "reason": "Claude: product posters depict each product's own UI cards inside the film frame; illustrations, not page structure"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T20:33:03.368Z",
+        "reason": "user confirmed: asked for the michaelpumo-style tech ticker and client strip; both pause on hover/focus and stop under reduced motion"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T20:33:14.895Z",
+        "reason": "Claude: only the Bolo poster's sun uses a coloured glow, from Bolo's design system (shadow-glow token)"
       }
     ]
   }
