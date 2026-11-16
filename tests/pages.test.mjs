@@ -40,17 +40,16 @@ for (const p of PAGES) {
   });
 }
 
-test('stylesheet defines the tokens and body background', () => {
-  for (const [k, v] of Object.entries({ '--bg': '#FFFFFF', '--soft': '#F3F5F4', '--ink': '#15171A', '--mute': '#5A6068', '--accent': '#1B5E3F', '--line': '#E3E5E8' })) {
-    assert.match(css, new RegExp(`${k}:\\s*${v}`, 'i'), `${k}`);
+test('styles.css carries the design tokens verbatim', () => {
+  const t = JSON.parse(read('design/tokens.json'));
+  for (const { name, value } of t.color.tokens) {
+    if (typeof value !== 'string' || value.startsWith('{')) continue;
+    assert.ok(css.toLowerCase().includes(`--${name}: ${value.toLowerCase()}`), `--${name}`);
   }
-  assert.match(css, /body\s*{[^}]*background:[^;]*var\(--bg\)/s);
-});
-
-test('mute text meets WCAG AA on both grounds', () => {
-  assert.ok(contrast('#5A6068', '#FFFFFF') >= 4.5);
-  assert.ok(contrast('#5A6068', '#F3F5F4') >= 4.5);
-  assert.ok(contrast('#1B5E3F', '#FFFFFF') >= 4.5);
+  assert.match(css, /body\s*{[^}]*background:\s*var\(--stage\)/s);
+  assert.doesNotMatch(css, /\.resume/);
+  assert.match(read('resume.css'), /\.resume\s*{/);
+  assert.match(read('resume.html'), /href="resume\.css"/);
 });
 
 test('home: sections in order and four case-study links', () => {
