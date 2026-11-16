@@ -207,3 +207,12 @@
   .tp-show.is-live .tp-rail button { padding: 0 10px; font-size: 13px; }
 }
 @media (prefers-reduced-transparency: reduce) { .tp-show.is-live .tp-rail { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
+/* Film video over its poster, with one play/pause disc */
+.tp-film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.tp-play { position: absolute; right: 20px; bottom: 20px; z-index: 2; width: 52px; height: 52px; border: 0; border-radius: 50%; display: grid; place-items: center; background: rgba(22, 22, 23, 0.62); color: var(--ink); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); cursor: pointer; }
+.tp-play svg { width: 20px; height: 20px; }
+.tp-chapter--bolo .tp-play { background: var(--bolo-sun); color: #2a1a00; }
+.tp-chapter--medioo .tp-play { background: var(--medioo-link); color: #00313a; }
+.tp-chapter--finioo .tp-play { background: var(--finioo-ember); color: var(--finioo-on-ember); }
+.tp-chapter--intellidrugs .tp-play { background: var(--intellidrugs-link); color: var(--intellidrugs-on-link); }
