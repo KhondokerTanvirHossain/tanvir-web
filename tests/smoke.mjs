@@ -115,6 +115,16 @@ try {
     check(`${tag} reload mid-show shows the right product`, after.on === showState(after.p, 4).active, JSON.stringify(after));
   }
 
+  // 4e. Every quote, at every width, ends above the carousel controls.
+  for (const [w, h] of [[1440, 900], [390, 844], [320, 640]]) {
+    await viewport(w, h); await load();
+    const q = await ev(`(async () => { const out = []; const quotes = [...document.querySelectorAll('.tp-quote')];
+      for (let i = 0; i < quotes.length; i++) { if (i) { document.getElementById('quote-next').click(); await new Promise((r) => setTimeout(r, 650)); }
+        const c = quotes[i].querySelector('figcaption').getBoundingClientRect(); const n = document.querySelector('.tp-quotes__nav').getBoundingClientRect(); out.push(Math.round(n.top - c.bottom)); }
+      return out; })()`);
+    check(`${w}x${h} every quote clears the carousel controls`, q.every((gap) => gap >= 0), `gaps ${q.join(',')}`);
+  }
+
   // 4c. Short and landscape screens: at each hold the product link and the film clear the rail and the viewport.
   for (const [w, h] of [[844, 390], [375, 548]]) {
     await viewport(w, h); await load();

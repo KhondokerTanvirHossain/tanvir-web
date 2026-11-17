@@ -77,7 +77,7 @@ test('home: every figure traces to facts', () => {
 test('home: quotes are real and traced', () => {
   assert.doesNotMatch(home, /Example|Name Surname/);
   const names = [...home.matchAll(/class="tp-quote__name">([^<]+)</g)].map((m) => m[1]);
-  assert.equal(names.length, 2);
+  assert.equal(names.length, 3);
   for (const n of names) assert.ok(facts.includes(n), n);
 });
 test('home: client cards link case studies, contact is complete', () => {

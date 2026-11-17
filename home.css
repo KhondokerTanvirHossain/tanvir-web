@@ -30,8 +30,8 @@
 .clock__note { font: 500 14px/1.4 var(--font-text); color: var(--ink-3); margin-top: var(--space-2); }
 
 .bx--quotes { grid-row: span 2; display: flex; flex-direction: column; padding: 56px 56px 40px; }
-.tp-quotes { position: relative; flex: 1; min-height: 300px; }
-.tp-quote { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); opacity: 0; transform: translateY(8px); transition: opacity 500ms cubic-bezier(.2, 0, 0, 1), transform 500ms cubic-bezier(.2, 0, 0, 1); visibility: hidden; }
+.tp-quotes { display: grid; flex: 1; align-items: stretch; }
+.tp-quote { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); opacity: 0; transform: translateY(8px); transition: opacity 500ms cubic-bezier(.2, 0, 0, 1), transform 500ms cubic-bezier(.2, 0, 0, 1); visibility: hidden; }
 .tp-quote.is-on { opacity: 1; transform: none; visibility: visible; }
 .tp-quote blockquote { margin: 0; font: 500 clamp(22px, 2.2vw, 32px)/1.3 var(--font-display); letter-spacing: -0.02em; text-wrap: pretty; }
 .tp-quote figcaption b { display: block; font: 600 18px/1.3 var(--font-text); }
@@ -167,7 +167,6 @@
   .bento, .cards, .lead-grid, .about { grid-template-columns: 1fr; }
   .bx--intro, .bx--quotes { grid-row: auto; }
   .bx--quotes { padding: var(--space-8); }
-  .tp-quotes { min-height: 340px; }
   .tp-chapter__inner { grid-template-columns: 1fr; gap: var(--space-6); padding-block: var(--space-16); }
   .tp-chapter__title { font-size: 30px; }
   .tp-chapter__lede { font-size: 16px; }
